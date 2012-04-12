@@ -1,0 +1,17 @@
+# Ignore all dotfiles...
+.*
+
+
+# except for .gitignore
+!.gitignore
+
+
+#play framework specified
+db
+eclipse
+log
+logs
+precompiled
+tmp
+test-result
+server.pid
