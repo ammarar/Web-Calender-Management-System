@@ -1,0 +1,10 @@
+#{extends 'main.html' /}
+#{set title:'addMetoTheList.html' /}
+
+<H1> Add Birthday </H1>
+
+#{form @Application.createBirthdayEvent()}
+<label> Birthday event name:</label> <input type="text" size="30" name="name"/>
+<label> Event date:</label> <input type="text" size="30" name="date"/>
+<input type="submit" value="Add Bookmark"  />
+#{/form}
