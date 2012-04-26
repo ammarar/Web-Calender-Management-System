@@ -1,0 +1,42 @@
+#{extends 'main.html' /}
+#{set title:'Register' /}
+
+#{form @Application.registerForm()}
+
+<ul>
+<li>
+	<label>User Name: </label>
+	<input type="text" size="30" name="username" value=${rf.getUserName()} >*
+	<b><font color="red">${rf.errors.get(0)}</font></b>
+</li>
+<li>
+	<label>First Name: </label>
+	<input type="text" size="30" name="firstname" value=${rf.getFirstName()} >*
+	<b><font color="red">${rf.errors.get(1)}</font></b>
+</li>
+<li>
+	<label>Last Name: </label>
+	<input type="text" size="30" name="lastname" value=${rf.getLastName()} >*
+	<b><font color="red">${rf.errors.get(2)}</font></b>
+</li>
+<li>
+	<label>Email: </label>
+	<input type="text" size="30" name="email" value=${rf.getEmail()} >*
+	<b><font color="red">${rf.errors.get(3)}</font></b>
+</li>
+<li>
+	<label>Password: </label>
+	<input type="password" size="30" name="password" >*
+	<b><font color="red">${rf.errors.get(4)}</font></b>
+</li>
+<li>
+	<label>Confirm Password: </label>
+	<input type="password" size="30" name="confirmPassword" >*
+</li>
+</ul>
+* Required
+<br/>
+<input type="submit" value="Submit" name="button">
+<input type="submit" value="Cancel" name="button">
+
+#{/form}
