@@ -8,7 +8,7 @@ public class BasicTest extends UnitTest {
     @Test
     public void userModelTest() {
         //Cerate a User 
-    	User ammar = new User("ammar", "Ammar", "Alrasihd", "123", 3).save();
+    	User ammar = new User("ammar", "Ammar", "Alrasihd", "admin@webcal.com", "123", 3).save();
     	
     	
     	// Pull ammar user put and check if its there 
