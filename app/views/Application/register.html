@@ -1,0 +1,19 @@
+#{extends 'main.html' /}
+#{set title:'Register' /}
+
+#{form @Application.registerForm()}
+
+<ul>
+<li><label>User Name: </label><input type="text" size="30" name="username" >*</li>
+<li><label>First Name: </label><input type="text" size="30" name="firstname" >*</li>
+<li><label>Last Name: </label><input type="text" size="30" name="lastname" >*</li>
+<li><label>Email: </label><input type="text" size="30" name="email" >*</li>
+<li><label>Password: </label><input type="password" size="30" name="password" >*</li>
+<li><label>Confirm Password: </label><input type="password" size="30" name="confirmPassword" >*</li>
+</ul>
+* Required
+</br>
+<input type="submit" value="Submit" name="button" >
+<input type="submit" value="Cancel" name="button" >
+
+#{/form}
