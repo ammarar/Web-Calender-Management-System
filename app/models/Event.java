@@ -13,9 +13,9 @@ import java.util.*;
 public class Event extends Model 
 {
     private String name;
-    private LocalDate date;
+    private String date;
     
-    public Event(String name, LocalDate date)
+    public Event(String name, String date)
     {
     	super();
     	this.name = name;
@@ -28,10 +28,10 @@ public class Event extends Model
 	public void setName(String name) {
 		this.name = name;
 	}
-	public LocalDate getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(LocalDate date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	

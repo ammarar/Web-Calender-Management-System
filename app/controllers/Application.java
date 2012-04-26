@@ -3,6 +3,8 @@ package controllers;
 import play.*;
 import play.mvc.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import org.joda.time.LocalDate;
@@ -15,8 +17,18 @@ public class Application extends Controller {
         render();
     }
     
-    public static void createBirthdayEvent(String name, LocalDate date, User birthdayPerson, boolean surprise)
+    public static void createBirthdayEvent(String name, String date, String birthdayPerson, Boolean surprise)
     {
+    	validation.required(name);
+    	validation.required(date);
+    	validation.required(birthdayPerson);
+    	validation.required(surprise);
+    	SimpleDateFormat f = new SimpleDateFormat("MM/dd/yyyy");
+		try {
+			f.parse(date);
+		} catch (ParseException e) {
+			validation.addError("date", "Date is not in MM/DD/YYYY format");
+		}
     	BirthdayEvent be = new BirthdayEvent(name, date, birthdayPerson, surprise);
     	be.save();
     	//Put the view of the confirmation page
