@@ -12,6 +12,14 @@ import org.joda.time.LocalDate;
 import models.*;
 import models.errors.RegisterForm;
 
+/** 
+ * 
+ * @author niau
+ * Protect Main Application Controller 
+ * To activate the protection e.g authentication please remove the comment from the following route 
+ * *      / =               module:secure
+ */
+@With(Secure.class)
 public class Application extends Controller {
 
     public static void index() {
