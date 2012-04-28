@@ -29,7 +29,9 @@ public class Application extends Controller {
     
     public static void createBirthdayEvent()
     {
-    	render();
+    	List<User> users = User.findAll();
+    	System.out.println(users);
+    	render(users);
     }
     
     public static void createBirthdayEventForm(String name, String date, String birthdayPerson, Boolean surprise)
@@ -37,7 +39,6 @@ public class Application extends Controller {
     	validation.required(name);
     	validation.required(date);
     	validation.required(birthdayPerson);
-    	validation.required(surprise);
     	SimpleDateFormat f = new SimpleDateFormat("MM/dd/yyyy");
 		try {
 			f.parse(date);
@@ -45,13 +46,13 @@ public class Application extends Controller {
 			validation.addError("date", "Date is not in MM/DD/YYYY format");
 		}
 	    if(validation.hasErrors()) {
+	    	System.out.println("PRogleahj");
 	          params.flash(); // add http parameters to the flash scope
 	          validation.keep(); // keep the errors for the next request
 	          createBirthdayEvent();
 	    }
-    	//BirthdayEvent be = new BirthdayEvent(name, date, birthdayPerson, surprise);
-    	//be.save();
-    	//Put the view of the confirmation page
+    	BirthdayEvent be = new BirthdayEvent(name, date, birthdayPerson, surprise);
+    	be.save();
 		index();
     }
     

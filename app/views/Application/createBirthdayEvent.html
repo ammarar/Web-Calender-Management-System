@@ -1,20 +1,30 @@
-#{extends 'main.html' /} #{set title:'Create Birthday Event' /}
+#{extends 'main.html' /}
+#{set title:'Create Birthday Event' /}
 
 <H1>Create Birthday Event</H1>
 
 #{form @Application.createBirthdayEventForm()}
 <div>
 	<label> Birthday event name:</label>
-	<input type="text" size="30" name="name" value="${flash.name}" /> * <span class="error">#{error 'name' /}</span>
+	<input type="text" size="30" name="name" value="${flash.name}" />
+	<span class="error">* #{error 'name' /}</span>
 </div>
 
 <div>
-	<label> Event date:</label> <input type="text" size="30" name="date" value="${flash.date}" /> * 
-	<span class="error">#{error 'date'/}</span>
+	<label> Event date:</label>
+	<input type="text" size="30" name="date" value="${flash.date}" /> 
+	<span class="error">* #{error 'date'/}</span>
 </div>
 
 <div>
-	<label> Who's birthday? </label> *
+	<label> Who's birthday? </label>
+	<select>
+		<option value="">&nbsb;</option>
+		#{list items:users, as:'user'}
+			<option value="${user.firstName}">${user.firstName}</option>
+		#{/list}
+	</select>
+	<span class="error">* #{error 'birthdayPerson'/}</span>
 </div>
 
 <div>
