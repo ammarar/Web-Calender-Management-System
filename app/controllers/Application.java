@@ -8,6 +8,7 @@ import play.data.validation.*;
 import play.libs.Crypto;
 import play.libs.Mail;
 import play.mvc.*;
+import util.CalendarHelper;
 import util.SendEmails;
 
 
@@ -32,6 +33,12 @@ import models.*;
 //@With(Secure.class)
 public class Application extends Controller {
 
+	
+	@Before
+	static void addDefaults() {
+		String currentYear = CalendarHelper.getCurrentYear();
+		 renderArgs.put("currentYear", currentYear);
+	}
 	
     public static void index() {
         //calendarMonth();
@@ -73,6 +80,10 @@ public class Application extends Controller {
     public static void calendarMonth()
     {
     	List<Event> events = Event.findAll();
+    	for (Event e : events)
+    	{
+    		e.getDate();
+    	}
     	render(events);
     }
 
