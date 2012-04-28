@@ -3,12 +3,21 @@ package controllers;
 import play.*;
 import play.data.validation.Equals;
 import play.data.validation.Required;
+import play.jobs.OnApplicationStart;
+import play.data.validation.*;
+import play.libs.Crypto;
+import play.libs.Mail;
 import play.mvc.*;
+import util.SendEmails;
+
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.HtmlEmail;
+import org.apache.commons.mail.SimpleEmail;
 import org.joda.time.LocalDate;
 
 import models.*;
@@ -23,8 +32,10 @@ import models.*;
 //@With(Secure.class)
 public class Application extends Controller {
 
+	
     public static void index() {
-        calendarMonth();
+        //calendarMonth();
+    	render();
     }
     
     public static void createBirthdayEvent()
@@ -63,13 +74,12 @@ public class Application extends Controller {
      */
     public static void calendarMonth()
     {
-    	render();
+    	List<Event> events = Event.findAll();
+    	render(events);
     }
 
-    ///TODO validation hash password email
     /**
-     * Get: register
-     * direct to register form
+     * Get: register which direct to register form
      */
     public static void register() {
     	render();
@@ -81,10 +91,9 @@ public class Application extends Controller {
     		@Required String username, 
     		@Required String firstname,
     		@Required String lastname, 
-    		@Required String email,
+    		@Required @Email String email,
     		@Required String password, 
-    		@Required 
-    		@Equals("password") String confirmPassword, 
+    		@Required @Equals("password") String confirmPassword, 
     		String button) {
     	
     	if (button.equals("Cancel")) {
@@ -99,10 +108,14 @@ public class Application extends Controller {
     		register();
     	}
     	else {
-    		User user = new User(username, firstname, lastname, email, password, 0);
+    		// save to database
+    		String hashedPassword = Crypto.passwordHash(password);
+    		User user = new User(username, firstname, lastname, email, hashedPassword, 0);
     		user.save();
-    		///TODO
+    		
     		// send Email 
+    		SendEmails se = new SendEmails();
+    		se.welcome(user);
     		
     		index();
     	}

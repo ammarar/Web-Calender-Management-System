@@ -18,26 +18,43 @@
 	<div class="footer">
 	<div class="body">
 	<div class="body">
-	<div id="sidebar"><a href="/app/views/Application/index.html"><img id="logo" src="/public/images/logo.gif" with="154" height="74" alt="" title=""/></a>
+	<div id="sidebar"><a href="@{Application.index()}"><img id="logo" src="/public/images/logo.gif" with="154" height="74" alt="" title=""/></a>
 		<ul class="navigation">
-			<li><a  href="/app/views/Application/index.html">HOME</a></li>
-			<li class="active"><a href="/app/views/Application/calendarMonth.html" >CALENDAR</a></li>
-			<li><a href="/app/views/Application/createBirthdayEvent.html">POST</a></li>
+			<li><a href="@{Application.index()}">HOME</a></li>
+			<li class="active"><a href="@{Application.calendarMonth()}" >CALENDAR</a></li>
+			<li><a href="@{Application.createBirthdayEvent()}">POST</a></li>
 		</ul>
 	</div>
 	<div id="content">
 	<div id='myCalendarContainer'>
 	<!--img src="/public/images/cotton-flower.jpg" width="726" height="546" alt="" title=""-->
+	
 	<script type="text/javascript">
 		var myCalendar = new JEC('myCalendarContainer', {
 			tableClass: 'styledCalendar',	
 			lastMonth: 201510,
 			specialDays: [ 1, 7 ]
 		});
+		
+		myCalendar.defineEvents(
+      [
+      
+        #{list items:events, as:'event'} 
+        {
+         
+          eventDate:20120430 ,
+          eventDescription: '${event.name}',
+        },
+       #{/list} 
+        { eventDate: 20120429, eventDescription: 'Kevin\'s BIG Birthday!' }
+      ]
+    );
 	
 		// show the calender 
 		myCalendar.showCalendar();
 	</script>
+	
+	
 	</div></div></div></div></div></div>
 	<div class="shadow"> </div></div></div>
 </body></html>

@@ -1,45 +1,63 @@
-#{extends 'main.html' /}
 #{set title:'Create Birthday Event' /}
 
-<H1>Create Birthday Event</H1>
+<<<<<<< HEAD
+<html>
+	<head>
+        <title>#{get 'title' /}</title>
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+        #{get 'moreStyles' /}
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+        <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        #{get 'moreScripts' /}
+    </head>
+<body>
+	<div id="background">
+	<div id="page">
+	<div class="header">
+	<div class="footer">
+	<div class="body">
+	<div class="body">
+	<div id="sidebar"><a href="@{Application.index()}"><img id="logo" src="/public/images/logo.gif" with="154" height="74" alt="" title=""/></a>
+		<ul class="navigation">
+			<li><a href="@{Application.index()}">HOME</a></li>
+			<li class="active"><a href="@{Application.calendarMonth()}">CALENDAR</a></li>
+			<li><a href="@{Application.createBirthdayEvent()}">POST</a></li>
+		</ul>
+	</div>
+	<div id="content">
+	#{form @Application.createBirthdayEventForm()}
+	<div>
+		<label><font color="#556B2F"> Birthday event name:</font></label>
+		<input type="text" size="30" name="name" value="${flash.name}" />
+		<span class="error">* #{error 'name' /}</span>
+	</div>
 
-#{form @Application.createBirthdayEventForm()}
-<div>
-	<label> Birthday event name:</label>
-	<input type="text" size="30" name="name" value="${flash.name}" />
-	<span class="error">* #{error 'name' /}</span>
-</div>
+	<div>
+		<label><font color="#556B2F"> Event date:</font></label>
+		<input type="text" size="30" name="date" value="${flash.date}" /> 
+		<span class="error">* #{error 'date'/}</span>
+	</div>
 
-<div>
-	<label> Event date:</label>
-	<input type="text" size="30" name="date" value="${flash.date}" /> 
-	<span class="error">* #{error 'date'/}</span>
-</div>
+	<div>
+		<label><font color="#556B2F"> Who's birthday? </font></label>
+		<select>
+			<option value="">&nbsb;</option>
+			#{list items:users, as:'user'}
+				<option value="${user.firstName}">${user.firstName}</option>
+			#{/list}
+		</select>
+		<span class="error">* #{error 'birthdayPerson'/}</span>
+	</div>
 
-<div>
-	<label> Who's birthday? </label>
-	<br/>
-	<select name="createdBy">
-		<option value="">&nbsp;</option>
-		#{list items:users, as:'user'}
-			<option value="${user.id}">${user.firstName}</option>
-		#{/list}
-	</select>
-	<span class="error">* #{error 'createdFor'/}</span>
-</div>
+	<div>
+		<label><font color="#556B2F"> Is it a surprise party?</font></label>
+		<input type="checkbox" value="${flash.surprise}" />
+	</div>
+	<div>
+		<input type="submit" value="Create Birthday Event" />
+	</div>
+	#{/form}
+	</div></div></div></div></div>
+	<div class="shadow"> </div></div></div>
+</body></html>
 
-<div>
-	<label> Event type: </label>
-	<br/>
-	<select name="eventType">
-		<option value=""> &nbsp; </option>
-			<option value="Birthday">Birthday</option>
-			<option value="Surprise Birthday Party">Surprise Birthday Party</option>
-	</select>
-	<span class="error">* #{error 'birthdayPerson'/}</span>
-</div>
-
-<div>
-	<input type="submit" value="Create Birthday Event" />
-</div>
-#{/form}
