@@ -5,6 +5,7 @@
 # Home page
 GET     /                                       Application.index
 GET     /register								Application.register
+GET     /forgetPassword							Applicaiton.forgetPassword								
 GET     /createBirthdayEvent					Application.createBirthdayEvent
 
 # Ignore favicon requests

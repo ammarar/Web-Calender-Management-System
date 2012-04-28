@@ -1,3 +1,8 @@
+/**
+ * Email services: for registration and user request password
+ * Author: John
+ * Date: 4.28.2012
+ */
 package util;
 
 import java.util.Properties;
@@ -23,7 +28,7 @@ public class SendEmails {
     Properties props = System.getProperties();
     
     public SendEmails() {
-    	props.put("mail.smtp.starttls.enable", "true"); // added this line
+    	props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", host);
         props.put("mail.smtp.user", userid);
         props.put("mail.smtp.password", pass);
@@ -53,5 +58,29 @@ public class SendEmails {
         catch (MessagingException e) {
         	e.printStackTrace();
         }
-    }   
+    } 
+    
+    public void sendPassword(User user) {
+
+        Session session = Session.getDefaultInstance(props, null);
+        MimeMessage message = new MimeMessage(session);
+        try {
+        	message.setFrom(new InternetAddress(from));
+        	InternetAddress toAddress = new InternetAddress(user.getEmail());
+            message.addRecipient(Message.RecipientType.TO, toAddress);
+            
+            message.setSubject("Password Request");
+            message.setText("Hi " + user.getFirstName() + ":\n\n" +
+            				"Here is your password: " + user.getPassword() + "\n\n" +
+            				"TSP Team 1");
+            
+            Transport transport = session.getTransport("smtp");
+            transport.connect(host, userid, pass);
+            transport.sendMessage(message, message.getAllRecipients());
+            transport.close();
+        }
+        catch (MessagingException e) {
+        	e.printStackTrace();
+        }
+    }
 }

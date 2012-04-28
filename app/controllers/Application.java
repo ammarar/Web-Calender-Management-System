@@ -92,6 +92,18 @@ public class Application extends Controller {
     		return;
     	}
     	
+    	User user;
+    	user = User.find("byUserName", username).first();
+    	if (user != null) {
+    		validation.addError("username", "The username already exists");
+    	}
+    	
+    	user = null;
+    	user = User.find("byEmail", email).first();
+    	if (user != null) {
+    		validation.addError("email", "The email already exists");
+    	}
+    	
     	// form validation	
     	if (validation.hasErrors()) {
     		params.flash();
@@ -100,8 +112,8 @@ public class Application extends Controller {
     	}
     	else {
     		// save to database
-    		String hashedPassword = Crypto.passwordHash(password);
-    		User user = new User(username, firstname, lastname, email, hashedPassword, 0);
+    		//String hashedPassword = Crypto.passwordHash(password);
+    		user = new User(username, firstname, lastname, email, password, 0);
     		user.save();
     		
     		// send Email 
@@ -112,4 +124,43 @@ public class Application extends Controller {
     	}
     }
   
+    /**
+     * user forget password
+     */
+    public static void forgetPassword() {
+    	render();
+    }
+    /**
+     * user request password form
+     */
+    public static void requestPassword (
+    	@Required String username,  
+		@Required @Email String email,
+		String button) {
+	
+		if (button.equals("Cancel")) {
+			index();
+			return;
+		}
+		
+		User user = User.find("byUserName", username).first();
+		if (user == null)
+		{
+			validation.addError(username, "username doesn't exist");
+		}
+		
+		// form validation	
+		if (validation.hasErrors()) {
+			params.flash();
+			validation.keep();
+			forgetPassword();
+		}
+		else {	
+			// send Email 
+			SendEmails se = new SendEmails();
+			se.sendPassword(user);
+			
+			index();
+		}
+    }
 }
