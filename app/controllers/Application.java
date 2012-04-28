@@ -27,7 +27,12 @@ public class Application extends Controller {
         calendarMonth();
     }
     
-    public static void createBirthdayEvent(String name, String date, String birthdayPerson, Boolean surprise)
+    public static void createBirthdayEvent()
+    {
+    	render();
+    }
+    
+    public static void createBirthdayEventForm(String name, String date, String birthdayPerson, Boolean surprise)
     {
     	validation.required(name);
     	validation.required(date);
@@ -39,14 +44,15 @@ public class Application extends Controller {
 		} catch (ParseException e) {
 			validation.addError("date", "Date is not in MM/DD/YYYY format");
 		}
-    	BirthdayEvent be = new BirthdayEvent(name, date, birthdayPerson, surprise);
-    	be.save();
+	    if(validation.hasErrors()) {
+	          params.flash(); // add http parameters to the flash scope
+	          validation.keep(); // keep the errors for the next request
+	          index();
+	    }
+    	//BirthdayEvent be = new BirthdayEvent(name, date, birthdayPerson, surprise);
+    	//be.save();
     	//Put the view of the confirmation page
-    }
-    
-    public static void createBirthdayEventForm()
-    {
-    	render();
+		render(name, date, birthdayPerson, surprise);
     }
     
     /**
