@@ -3,6 +3,8 @@
 #{stylesheet 'jec-styled.css' /}
 #{script 'calendar-2.4.js' /}
 
+
+
 <H1> Calnedr Month View</h1>
 
     <script type="text/javascript">
@@ -12,28 +14,27 @@
       specialDays: [ 1, 7 ]
       });
       
-      //Add all the exisiting events to the claender 
-          myCal.defineEvents(
+ 
+    
+     myCalendar.defineEvents(
       [
-      <#list events as event>
+      
+        #{list items:events, as:'event'} 
         {
-          eventDate: event.d,
-          eventDescription: 'JEC 2.0 Released',
-          eventLink: 'http://calendar.ilsen.net',
-          eventLinkTitle: 'A JavaScript Event Calendar'
+         
+          eventDate:20120430 ,
+          eventDescription: '${event.name}',
         },
-        { eventDate: 20100705, eventDescription: 'Kevin\'s Birthday' },
-        { eventDate: 20090705, eventDescription: 'Kevin\'s BIG Birthday!' }
+       #{/list} 
+        { eventDate: 20120429, eventDescription: 'Kevin\'s BIG Birthday!' }
       ]
-      </#list>
     );
+       
       
       
       // show the calender 
       myCalendar.showCalendar();
     </script>
 
-
-
-
 <div id='myCalendarContainer'></div>
+

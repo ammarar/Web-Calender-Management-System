@@ -3,6 +3,7 @@ package controllers;
 import play.*;
 import play.data.validation.Equals;
 import play.data.validation.Required;
+import play.jobs.OnApplicationStart;
 import play.mvc.*;
 
 import java.text.ParseException;
@@ -23,6 +24,7 @@ import models.*;
 //@With(Secure.class)
 public class Application extends Controller {
 
+	
     public static void index() {
         calendarMonth();
     }
@@ -60,7 +62,7 @@ public class Application extends Controller {
      */
     public static void calendarMonth()
     {
-    	List<Event> events = BirthdayEvent.findAll();
+    	List<Event> events = Event.findAll();
     	render(events);
     }
 
