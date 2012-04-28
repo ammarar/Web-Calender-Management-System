@@ -2,18 +2,33 @@
 #{set title:'Register' /}
 
 #{form @Application.registerForm()}
+<div>
+	User Name: <input type="text" size="30" name="username" value="${flash.username}" >*
+	<span class="error">#{error 'username' /}</span>
+</div>
+<div>
+	First Name: <input type="text" size="30" name="firstname" value="${flash.firstname}">*
+	<span class="error">#{error 'firstname' /}</span>
+</div>
+<div>
+	Last Name: <input type="text" size="30" name="lastname" value="${flash.lastname}">*
+	<span class="error">#{error 'lastname' /}</span>
+</div>
+<div>
+	Email: <input type="text" size="30" name="email" value="${flash.email}">*
+	<span class="error">#{error 'email' /}</span>
+</div>
+<div>
+	Password: <input type="password" size="30" name="password" >*
+	<span class="error">#{error 'password' /}</span>
+</div>
+<div>
+	Confirm Password: <input type="password" size="30" name="confirmPassword" >*
+	<span class="error">#{error 'confirmPassword' /}</span>
+</div>
 
-<ul>
-<li><label>User Name: </label><input type="text" size="30" name="username" >*</li>
-<li><label>First Name: </label><input type="text" size="30" name="firstname" >*</li>
-<li><label>Last Name: </label><input type="text" size="30" name="lastname" >*</li>
-<li><label>Email: </label><input type="text" size="30" name="email" >*</li>
-<li><label>Password: </label><input type="password" size="30" name="password" >*</li>
-<li><label>Confirm Password: </label><input type="password" size="30" name="confirmPassword" >*</li>
-</ul>
 * Required
-</br>
+</br></br>
 <input type="submit" value="Submit" name="button" >
 <input type="submit" value="Cancel" name="button" >
-
 #{/form}
