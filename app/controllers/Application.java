@@ -25,7 +25,7 @@ import models.errors.RegisterForm;
 public class Application extends Controller {
 
     public static void index() {
-        render();
+        calendarMonth();
     }
     
     public static void createBirthdayEvent(String name, String date, String birthdayPerson, Boolean surprise)
@@ -46,6 +46,14 @@ public class Application extends Controller {
     }
     
     public static void createBirthdayEventForm()
+    {
+    	render();
+    }
+    
+    /**
+     * This method is responsible for rendering the Calendar monthly view..  
+     */
+    public static void calendarMonth()
     {
     	render();
     }
