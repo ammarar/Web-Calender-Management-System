@@ -12,7 +12,6 @@ import java.util.*;
 import org.joda.time.LocalDate;
 
 import models.*;
-import models.errors.RegisterForm;
 
 /** 
  * 
@@ -54,6 +53,14 @@ public class Application extends Controller {
     	//be.save();
     	//Put the view of the confirmation page
 		render(name, date, birthdayPerson, surprise);
+    }
+    
+    /**
+     * This method is responsible for rendering the Calendar monthly view..  
+     */
+    public static void calendarMonth()
+    {
+    	render();
     }
     
     /**
