@@ -12,6 +12,23 @@
       specialDays: [ 1, 7 ]
       });
       
+      //Add all the exisiting events to the claender 
+          myCal.defineEvents(
+      [
+      <#list events as event>
+        {
+          eventDate: event.d,
+          eventDescription: 'JEC 2.0 Released',
+          eventLink: 'http://calendar.ilsen.net',
+          eventLinkTitle: 'A JavaScript Event Calendar'
+        },
+        { eventDate: 20100705, eventDescription: 'Kevin\'s Birthday' },
+        { eventDate: 20090705, eventDescription: 'Kevin\'s BIG Birthday!' }
+      ]
+      </#list>
+    );
+      
+      
       // show the calender 
       myCalendar.showCalendar();
     </script>

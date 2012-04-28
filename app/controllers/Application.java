@@ -54,7 +54,8 @@ public class Application extends Controller {
      */
     public static void calendarMonth()
     {
-    	render();
+    	List<Event> events = BirthdayEvent.findAll();
+    	render(events);
     }
 
     ///TODO validation hash password email
