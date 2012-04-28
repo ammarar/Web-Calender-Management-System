@@ -1,10 +1,28 @@
 #{extends 'main.html' /}
-#{set title:'addMetoTheList.html' /}
+#{set title:'Create Birthday Event' /}
 
-<H1> Add Birthday </H1>
+<H1> Create Birthday Event </H1>
 
 #{form @Application.createBirthdayEvent()}
-<label> Birthday event name:</label> <input type="text" size="30" name="name"/>
-<label> Event date:</label> <input type="text" size="30" name="date"/>
-<input type="submit" value="Add Bookmark"  />
+<div>
+<label> Birthday event name:</label>
+<input type="text" size="30" name="name" value="${flash.name}"/> *
+<span class="error">#{error 'name' /}</span>
+</div>
+
+<div>
+<label> Event date:</label> <input type="text" size="30" name="date" value="${flash.date}"/> *
+<span class="error">#{error 'date' /}</span>
+</div>
+
+<div>
+<label> Who's birthday? </label> *
+</div>
+
+<div>
+<label> Is it a surprise party?</label><input type="checkbox" value="${flash.surprise}"/>
+</div>
+<div>
+<input type="submit" value="Create Birthday Event"  />
+</div>
 #{/form}
