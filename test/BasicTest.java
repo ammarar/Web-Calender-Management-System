@@ -16,8 +16,6 @@ public class BasicTest extends UnitTest {
     	x = User.findAll();
     	
     	assertEquals(ammar, x.get(0));
-    	
-    	
     }
 
 }

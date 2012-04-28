@@ -1,5 +1,6 @@
 #{set title:'Create Birthday Event' /}
 
+<<<<<<< HEAD
 <html>
 	<head>
         <title>#{get 'title' /}</title>
@@ -50,3 +51,39 @@
 	</div></div></div></div></div>
 	<div class="shadow"> </div></div></div>
 </body></html>
+=======
+<H1>Create Birthday Event</H1>
+
+#{form @Application.createBirthdayEventForm()}
+<div>
+	<label> Birthday event name:</label>
+	<input type="text" size="30" name="name" value="${flash.name}" />
+	<span class="error">* #{error 'name' /}</span>
+</div>
+
+<div>
+	<label> Event date:</label>
+	<input type="text" size="30" name="date" value="${flash.date}" /> 
+	<span class="error">* #{error 'date'/}</span>
+</div>
+
+<div>
+	<label> Who's birthday? </label>
+	<select>
+		<option value="">&nbsb;</option>
+		#{list items:users, as:'user'}
+			<option value="${user.firstName}">${user.firstName}</option>
+		#{/list}
+	</select>
+	<span class="error">* #{error 'birthdayPerson'/}</span>
+</div>
+
+<div>
+	<label> Is it a surprise party?</label>
+	<input type="checkbox" value="${flash.surprise}" />
+</div>
+<div>
+	<input type="submit" value="Create Birthday Event" />
+</div>
+#{/form}
+>>>>>>> 7bfc038e3b72b78a782f33a8ae325c39fea283f0
