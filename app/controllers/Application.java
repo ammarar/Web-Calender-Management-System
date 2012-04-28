@@ -24,7 +24,8 @@ import models.*;
 public class Application extends Controller {
 
     public static void index() {
-        calendarMonth();
+        //calendarMonth();
+    	render();
     }
     
     public static void createBirthdayEvent()
