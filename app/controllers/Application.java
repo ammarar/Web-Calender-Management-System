@@ -34,25 +34,27 @@ public class Application extends Controller {
     	render(users);
     }
     
-    public static void createBirthdayEventForm(String name, String date, String birthdayPerson, Boolean surprise)
+    public static void createBirthdayEventForm(String name, String date, Long createdBy, String eventType)
     {
     	validation.required(name);
     	validation.required(date);
-    	validation.required(birthdayPerson);
-    	SimpleDateFormat f = new SimpleDateFormat("MM/dd/yyyy");
+    	validation.required(createdBy);
+    	SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			f.parse(date);
 		} catch (ParseException e) {
-			validation.addError("date", "Date is not in MM/DD/YYYY format");
+			validation.addError("date", "Date is not in yyyy-MM-dd format");
 		}
-	    if(validation.hasErrors()) {
-	    	System.out.println("PRogleahj");
-	          params.flash(); // add http parameters to the flash scope
-	          validation.keep(); // keep the errors for the next request
+	    if(validation.hasErrors()) 
+	    {
+	          params.flash();
+	          validation.keep();
 	          createBirthdayEvent();
 	    }
-    	BirthdayEvent be = new BirthdayEvent(name, date, birthdayPerson, surprise);
-    	be.save();
+	    //Put the username for createdBy instead of 2
+	    Event ev = new Event(name, date, createdBy, 2, eventType);
+	    System.out.println(ev);
+	    ev.save();
 		index();
     }
     

@@ -18,19 +18,27 @@
 
 <div>
 	<label> Who's birthday? </label>
-	<select>
-		<option value="">&nbsb;</option>
+	<br/>
+	<select name="createdBy">
+		<option value="">&nbsp;</option>
 		#{list items:users, as:'user'}
-			<option value="${user.firstName}">${user.firstName}</option>
+			<option value="${user.id}">${user.firstName}</option>
 		#{/list}
+	</select>
+	<span class="error">* #{error 'createdFor'/}</span>
+</div>
+
+<div>
+	<label> Event type: </label>
+	<br/>
+	<select name="eventType">
+		<option value=""> &nbsp; </option>
+			<option value="Birthday">Birthday</option>
+			<option value="Surprise Birthday Party">Surprise Birthday Party</option>
 	</select>
 	<span class="error">* #{error 'birthdayPerson'/}</span>
 </div>
 
-<div>
-	<label> Is it a surprise party?</label>
-	<input type="checkbox" value="${flash.surprise}" />
-</div>
 <div>
 	<input type="submit" value="Create Birthday Event" />
 </div>

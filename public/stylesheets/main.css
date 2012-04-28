@@ -397,5 +397,9 @@
 }		
 /**----------------- Start Freatured Style  --------------------**/			
 
+.error
+{
+	color: red;
+}
 
 /** end of Content Style **/			
