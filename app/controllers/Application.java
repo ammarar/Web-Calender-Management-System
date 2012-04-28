@@ -12,7 +12,6 @@ import java.util.*;
 import org.joda.time.LocalDate;
 
 import models.*;
-import models.errors.RegisterForm;
 
 /** 
  * 
