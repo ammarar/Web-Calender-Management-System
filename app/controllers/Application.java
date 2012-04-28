@@ -32,26 +32,33 @@ public class Application extends Controller {
         calendarMonth();
     }
     
-    public static void createBirthdayEvent(String name, String date, String birthdayPerson, Boolean surprise)
+    public static void createBirthdayEvent()
+    {
+    	List<User> users = User.findAll();
+    	System.out.println(users);
+    	render(users);
+    }
+    
+    public static void createBirthdayEventForm(String name, String date, String birthdayPerson, Boolean surprise)
     {
     	validation.required(name);
     	validation.required(date);
     	validation.required(birthdayPerson);
-    	validation.required(surprise);
     	SimpleDateFormat f = new SimpleDateFormat("MM/dd/yyyy");
 		try {
 			f.parse(date);
 		} catch (ParseException e) {
 			validation.addError("date", "Date is not in MM/DD/YYYY format");
 		}
+	    if(validation.hasErrors()) {
+	    	System.out.println("PRogleahj");
+	          params.flash(); // add http parameters to the flash scope
+	          validation.keep(); // keep the errors for the next request
+	          createBirthdayEvent();
+	    }
     	BirthdayEvent be = new BirthdayEvent(name, date, birthdayPerson, surprise);
     	be.save();
-    	//Put the view of the confirmation page
-    }
-    
-    public static void createBirthdayEventForm()
-    {
-    	render();
+		index();
     }
     
     /**

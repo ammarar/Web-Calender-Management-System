@@ -1,22 +1,43 @@
-#{extends 'main.html' /}
 #{set title:'Month view' /}
 #{stylesheet 'jec-styled.css' /}
 #{script 'calendar-2.4.js' /}
 
-<H1> Calnedr Month View</h1>
-
-    <script type="text/javascript">
-      var myCalendar = new JEC('myCalendarContainer', {
-      tableClass: 'styledCalendar',	
-      lastMonth: 201510,
-      specialDays: [ 1, 7 ]
-      });
-      
-      // show the calender 
-      myCalendar.showCalendar();
-    </script>
-
-
-
-
-<div id='myCalendarContainer'></div>
+<html>
+	<head>
+        <title>#{get 'title' /}</title>
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+        #{get 'moreStyles' /}
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+        <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        #{get 'moreScripts' /}
+    </head>
+<body>
+	<div id="background">
+	<div id="page">
+	<div class="header">
+	<div class="footer">
+	<div class="body">
+	<div class="body">
+	<div id="sidebar"><a href="/app/views/Application/index.html"><img id="logo" src="/public/images/logo.gif" with="154" height="74" alt="" title=""/></a>
+		<ul class="navigation">
+			<li><a href="/app/views/Application/index.html">HOME</a></li>
+			<li class="active"><a href="/app/views/Application/calendarMonth.html" >CALENDAR</a></li>
+			<li><a href="/app/views/Application/createBirthdayEvent.html">POST</a></li>
+		</ul>
+	</div>
+	<div id="content">
+	<div id='myCalendarContainer'>
+	<!--img src="/public/images/cotton-flower.jpg" width="726" height="546" alt="" title=""-->
+	<script type="text/javascript">
+		var myCalendar = new JEC('myCalendarContainer', {
+			tableClass: 'styledCalendar',	
+			lastMonth: 201510,
+			specialDays: [ 1, 7 ]
+		});
+	
+		// show the calender 
+		myCalendar.showCalendar();
+	</script>
+	</div></div></div></div></div></div>
+	<div class="shadow"> </div></div></div>
+</body></html>
