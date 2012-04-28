@@ -1,0 +1,22 @@
+#{extends 'main.html' /}
+#{set title:'Month view' /}
+#{stylesheet 'jec-styled.css' /}
+#{script 'calendar-2.4.js' /}
+
+<H1> Calnedr Month View</h1>
+
+    <script type="text/javascript">
+      var myCalendar = new JEC('myCalendarContainer', {
+      tableClass: 'styledCalendar',	
+      lastMonth: 201510,
+      specialDays: [ 1, 7 ]
+      });
+      
+      // show the calender 
+      myCalendar.showCalendar();
+    </script>
+
+
+
+
+<div id='myCalendarContainer'></div>
