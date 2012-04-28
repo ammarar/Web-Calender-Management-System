@@ -62,14 +62,6 @@ public class Application extends Controller {
     {
     	render();
     }
-    
-    /**
-     * This method is responsible for rendering the Calendar monthly view..  
-     */
-    public static void calendarMonth()
-    {
-    	render();
-    }
 
     ///TODO validation hash password email
     /**
