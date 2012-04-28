@@ -28,16 +28,33 @@
 	<div id="content">
 	<div id='myCalendarContainer'>
 	<!--img src="/public/images/cotton-flower.jpg" width="726" height="546" alt="" title=""-->
+	
 	<script type="text/javascript">
 		var myCalendar = new JEC('myCalendarContainer', {
 			tableClass: 'styledCalendar',	
 			lastMonth: 201510,
 			specialDays: [ 1, 7 ]
 		});
+		
+		myCalendar.defineEvents(
+      [
+      
+        #{list items:events, as:'event'} 
+        {
+         
+          eventDate:20120430 ,
+          eventDescription: '${event.name}',
+        },
+       #{/list} 
+        { eventDate: 20120429, eventDescription: 'Kevin\'s BIG Birthday!' }
+      ]
+    );
 	
 		// show the calender 
 		myCalendar.showCalendar();
 	</script>
+	
+	
 	</div></div></div></div></div></div>
 	<div class="shadow"> </div></div></div>
 </body></html>
