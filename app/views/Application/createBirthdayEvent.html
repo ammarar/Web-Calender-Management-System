@@ -1,6 +1,5 @@
 #{set title:'Create Birthday Event' /}
 
-<<<<<<< HEAD
 <html>
 	<head>
         <title>#{get 'title' /}</title>
@@ -17,73 +16,48 @@
 	<div class="footer">
 	<div class="body">
 	<div class="body">
-	<div id="sidebar"><a href="/app/views/Application/index.html"><img id="logo" src="/public/images/logo.gif" with="154" height="74" alt="" title=""/></a>
+	<div id="sidebar"><a href="@{Application.index()}"><img id="logo" src="/public/images/logo.gif" with="154" height="74" alt="" title=""/></a>
 		<ul class="navigation">
-			<li><a href="/app/views/Application/index.html">HOME</a></li>
-			<li class="active"><a href="/app/views/Application/calendarMonth.html" >CALENDAR</a></li>
-			<li><a href="/app/views/Application/createBirthdayEvent.html">POST</a></li>
+			<li><a href="@{Application.index()}">HOME</a></li>
+			<li><a href="@{Application.calendarMonth()}">CALENDAR</a></li>
+			<li class="active"><a href="@{Application.createBirthdayEvent()}">POST</a></li>
 		</ul>
 	</div>
 	<div id="content">
-	#{form @Application.createBirthdayEvent()}
+	#{form @Application.createBirthdayEventForm()}
+	<p></p>
 	<div>
 		<label><font color="#556B2F"> Birthday event name:</font></label>
-		<input type="text" size="30" name="name" value="${flash.name}"/><font color="#556B2F"> *</font>
-		<span class="error">#{error 'name' /}</span>
+		<input type="text" size="30" name="name" value="${flash.name}" />
+		<span class="error"><font color="#556B2F">* </font>#{error 'name' /}</span>
 	</div>
 
 	<div>
-		<label><font color="#556B2F"> Event date:</font></label> <input type="text" size="30" name="date" value="${flash.date}"/><font color="#556B2F"> *</font>
-		<span class="error">#{error 'date' /}</span>
+		<label><font color="#556B2F"> Event date:</font></label>
+		<input type="text" size="30" name="date" value="${flash.date}" /> 
+		<span class="error"><font color="#556B2F">* </font>#{error 'date'/}</span>
 	</div>
 
 	<div>
-		<label><font color="#556B2F"> Who's birthday? </font></label><font color="#556B2F"> *</font>
+		<label><font color="#556B2F"> Who's birthday? </font></label>
+		<select>
+			<option value="">&nbsb;</option>
+			#{list items:users, as:'user'}
+				<option value="${user.firstName}">${user.firstName}</option>
+			#{/list}
+		</select>
+		<span class="error"><font color="#556B2F">* </font>#{error 'birthdayPerson'/}</span>
 	</div>
 
 	<div>
-		<label><font color="#556B2F"> Is it a surprise party?</font></label><input type="checkbox" value="${flash.surprise}"/>
+		<label><font color="#556B2F"> Is it a surprise party?</font></label>
+		<input type="checkbox" value="${flash.surprise}" />
 	</div>
 	<div>
-		<input type="submit" value="Create Birthday Event"  />
+		<input type="submit" value="Create Birthday Event" />
 	</div>
 	#{/form}
 	</div></div></div></div></div>
 	<div class="shadow"> </div></div></div>
 </body></html>
-=======
-<H1>Create Birthday Event</H1>
 
-#{form @Application.createBirthdayEventForm()}
-<div>
-	<label> Birthday event name:</label>
-	<input type="text" size="30" name="name" value="${flash.name}" />
-	<span class="error">* #{error 'name' /}</span>
-</div>
-
-<div>
-	<label> Event date:</label>
-	<input type="text" size="30" name="date" value="${flash.date}" /> 
-	<span class="error">* #{error 'date'/}</span>
-</div>
-
-<div>
-	<label> Who's birthday? </label>
-	<select>
-		<option value="">&nbsb;</option>
-		#{list items:users, as:'user'}
-			<option value="${user.firstName}">${user.firstName}</option>
-		#{/list}
-	</select>
-	<span class="error">* #{error 'birthdayPerson'/}</span>
-</div>
-
-<div>
-	<label> Is it a surprise party?</label>
-	<input type="checkbox" value="${flash.surprise}" />
-</div>
-<div>
-	<input type="submit" value="Create Birthday Event" />
-</div>
-#{/form}
->>>>>>> 7bfc038e3b72b78a782f33a8ae325c39fea283f0
