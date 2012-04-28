@@ -47,12 +47,12 @@ public class Application extends Controller {
 	    if(validation.hasErrors()) {
 	          params.flash(); // add http parameters to the flash scope
 	          validation.keep(); // keep the errors for the next request
-	          index();
+	          createBirthdayEvent();
 	    }
     	//BirthdayEvent be = new BirthdayEvent(name, date, birthdayPerson, surprise);
     	//be.save();
     	//Put the view of the confirmation page
-		render(name, date, birthdayPerson, surprise);
+		index();
     }
     
     /**
