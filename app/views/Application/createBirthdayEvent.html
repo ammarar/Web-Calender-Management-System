@@ -1,6 +1,5 @@
 #{set title:'Create Birthday Event' /}
 
-<<<<<<< HEAD
 <html>
 	<head>
         <title>#{get 'title' /}</title>
@@ -20,22 +19,23 @@
 	<div id="sidebar"><a href="@{Application.index()}"><img id="logo" src="/public/images/logo.gif" with="154" height="74" alt="" title=""/></a>
 		<ul class="navigation">
 			<li><a href="@{Application.index()}">HOME</a></li>
-			<li class="active"><a href="@{Application.calendarMonth()}">CALENDAR</a></li>
-			<li><a href="@{Application.createBirthdayEvent()}">POST</a></li>
+			<li><a href="@{Application.calendarMonth()}">CALENDAR</a></li>
+			<li class="active"><a href="@{Application.createBirthdayEvent()}">POST</a></li>
 		</ul>
 	</div>
 	<div id="content">
 	#{form @Application.createBirthdayEventForm()}
+	<p></p>
 	<div>
 		<label><font color="#556B2F"> Birthday event name:</font></label>
 		<input type="text" size="30" name="name" value="${flash.name}" />
-		<span class="error">* #{error 'name' /}</span>
+		<span class="error"><font color="#556B2F">* </font>#{error 'name' /}</span>
 	</div>
 
 	<div>
 		<label><font color="#556B2F"> Event date:</font></label>
 		<input type="text" size="30" name="date" value="${flash.date}" /> 
-		<span class="error">* #{error 'date'/}</span>
+		<span class="error"><font color="#556B2F">* </font>#{error 'date'/}</span>
 	</div>
 
 	<div>
@@ -46,7 +46,7 @@
 				<option value="${user.firstName}">${user.firstName}</option>
 			#{/list}
 		</select>
-		<span class="error">* #{error 'birthdayPerson'/}</span>
+		<span class="error"><font color="#556B2F">* </font>#{error 'birthdayPerson'/}</span>
 	</div>
 
 	<div>
