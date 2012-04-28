@@ -461,5 +461,9 @@
 		
 /**----------------- Start Freatured Style  --------------------**/			
 
+span.error
+{
+	color: red;
+}
 
 /** end of Content Style **/			
