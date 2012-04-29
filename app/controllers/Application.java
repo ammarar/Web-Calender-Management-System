@@ -125,7 +125,8 @@ public class Application extends Controller {
     	List<Event> events = Event.findAll();
     	for (Event e : events)
     	{
-    		e.getDate();
+    		if(e.getType().equalsIgnoreCase("Birthday") || e.getType().equalsIgnoreCase("Surprise"))
+    			e.setDate(CalendarHelper.formatDateString(e.getDate()));
     	}
     	render(events);
     }
