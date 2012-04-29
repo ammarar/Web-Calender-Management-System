@@ -30,7 +30,7 @@ import models.*;
  * To activate the protection e.g authentication please remove the comment from the following route 
  * *      / =               module:secure
  */
-//@With(Secure.class)
+@With(Secure.class)
 public class Application extends Controller {
 
 	
