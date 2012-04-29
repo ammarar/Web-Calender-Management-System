@@ -3,7 +3,7 @@
 /* "Global" settings for the calendar table */
 table.styledCalendar {
   border-collapse: collapse;
-  border: 3px solid #99997a;
+  border: 20px solid #99997a;
   font-size: 12px;
   font-family: Arial, Verdana;
   margin: 5px;

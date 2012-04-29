@@ -402,4 +402,11 @@
 	color: red;
 }
 
+#post label{
+	margin-left:100px;
+}
+
+#post input{
+	
+}
 /** end of Content Style **/			
