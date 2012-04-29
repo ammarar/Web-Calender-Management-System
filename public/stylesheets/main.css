@@ -394,7 +394,22 @@
 
 #page .header .footer .body #content .featured .header ul li.last a:hover {
 	color:#ffffff;
-}		
+}
+
+#username {
+	position:relative;
+	top:60px;
+	left:1020px;
+	color:#003300;
+}
+
+#logout {
+	position:relative;
+	top:60px;
+	left:1020px;
+	color:#003300;
+}
+
 /**----------------- Start Freatured Style  --------------------**/			
 
 .error
