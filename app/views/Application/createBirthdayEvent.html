@@ -42,17 +42,21 @@
 		</tr>
 		<tr>
 			<td><label><font color="#556B2F"> Who's birthday? </font></label></td>
-			<td><select>
-				<option value="">&nbsb;</option>
+			<td><select name="createdFor">
+				<option value="">&nbsp;</option>
 				#{list items:users, as:'user'}
-					<option value="${user.firstName}">${user.firstName}</option>
+					<option value="${user.id}">${user.firstName} ${user.lastName}</option>
 				#{/list}
 			</select></td>
 			<td><span class="error"><font color="#556B2F">* </font>#{error 'birthdayPerson'/}</span></td>
 		</tr>
 		<tr>
-			<td><label><font color="#556B2F"> Is it a surprise party?</font></label></td>
-			<td><input type="checkbox" value="${flash.surprise}" /></td>
+			<td><label><font color="#556B2F"> Event type:</font></label></td>
+			<td><select name="eventType">
+				<option value="">&nbsp;</option>
+				<option value="Birthday">Birthday</option>
+				<option value="Surpirse">Surpirse Party</option>
+			</select></td>
 		</tr>
 		<tr>
 			<td><input style="margin-left:100px;" type="submit" value="Create Birthday Event" /></td>

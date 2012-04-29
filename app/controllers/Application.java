@@ -52,11 +52,12 @@ public class Application extends Controller {
     	render(users);
     }
     
-    public static void createBirthdayEventForm(String name, String date, Long createdBy, String eventType)
+    public static void createBirthdayEventForm(String name, String date, Long createdFor, String eventType)
     {
     	validation.required(name);
     	validation.required(date);
-    	validation.required(createdBy);
+    	validation.required(createdFor);
+    	validation.required(eventType);
     	SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			f.parse(date);
@@ -69,8 +70,8 @@ public class Application extends Controller {
 	          validation.keep();
 	          createBirthdayEvent();
 	    }
-	    //Put the username for createdBy instead of 2
-	    Event ev = new Event(name, date, createdBy, 2, eventType);
+	    //TODO:Put the username for createdBy instead of 2
+	    Event ev = new Event(name, date, createdFor, 2, eventType);
 	    System.out.println(ev);
 	    ev.save();
 		index();
