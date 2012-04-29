@@ -25,7 +25,7 @@ table.styledCalendar td {
 
 /* Formatting of the events when they appear in a day cell */
 table.styledCalendar td div.events {
-  font-size: 9px;
+  font-size: 10px;
   line-height: 10px;
   height: 60px; 
   overflow-y: auto; 
