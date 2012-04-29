@@ -1,6 +1,7 @@
 package controllers;
 
 import play.*;
+import play.data.binding.ParamNode;
 import play.data.validation.Equals;
 import play.data.validation.Required;
 import play.jobs.OnApplicationStart;
@@ -73,6 +74,45 @@ public class Application extends Controller {
 	    //TODO:Put the username for createdBy instead of 2
 	    Event ev = new Event(name, date, createdFor, 2, eventType);
 	    System.out.println(ev);
+	    ev.save();
+		index();
+    }
+    
+    public static void editEvent()
+    {
+    	long eventID = 1;//TODO: Long.parseLong(session.get("eventID"));
+    	Event ev = Event.findById(eventID);
+    	List<User> users = User.findAll();
+    	String userName = null;
+    	for(User user:users)
+    	{
+    		if(user.getId() == ev.getCreatedFor());
+    		{
+    			userName = user.getFirstName() + " " + user.getLastName();
+    		}
+    	}
+    	render(ev, users, userName);
+    }
+    
+    public static void editEventForm(String name, String date, Long createdFor, String eventType, long eventID)
+    {
+    	validation.required(name);
+    	validation.required(date);
+    	validation.required(createdFor);
+    	validation.required(eventType);
+    	SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			f.parse(date);
+		} catch (ParseException e) {
+			validation.addError("date", "Date is not in yyyy-MM-dd format");
+		}
+	    if(validation.hasErrors()) 
+	    {
+	          params.flash();
+	          validation.keep();
+	          createBirthdayEvent();
+	    }
+	    Event ev = Event.findById(eventID);
 	    ev.save();
 		index();
     }

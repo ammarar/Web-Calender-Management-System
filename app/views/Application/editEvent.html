@@ -1,4 +1,4 @@
-#{set title:'Create Birthday Event' /}
+#{set title:'Edit Birthday Event' /}
 
 <html>
 	<head>
@@ -24,28 +24,30 @@
 		</ul>
 	</div>
 	<div id="content">
-	#{form @Application.createBirthdayEventForm()}
+	#{form @Application.editEventForm()}
 	<p></p>
 	<div id="post">
 	<table style="margin-top:50px">
 		<th></th><th></th><th></th>
 		<tr >
 			<td><label><font color="#556B2F"> Birthday event name:</font></label></td>
-			<td><input type="text" size="30" name="name" value="${flash.name}" /></td>
+			<td><input type="text" size="30" name="name" value="${ev.name}" /></td>
 			<td><span class="error"><font color="#556B2F">* </font>#{error 'name' /}</span></td>
 		</tr>
 		<tr>
 			<td><label><font color="#556B2F"> Event date:</font></label></td>
-			<td><input type="text" size="30" name="date" value="${flash.date}" /> </td>
+			<td><input type="text" size="30" name="date" value="${ev.date}" /> </td>
 			<td><span class="error"><font color="#556B2F">* </font>#{error 'date'/}</span></td>
 			
 		</tr>
 		<tr>
 			<td><label><font color="#556B2F"> Who's birthday? </font></label></td>
 			<td><select name="createdFor">
-				<option value="">&nbsp;</option>
+				<option value="${ev.createdFor}" selected="selected">${userName}</option>
 				#{list items:users, as:'user'}
-					<option value="${user.id}">${user.firstName} ${user.lastName}</option>
+					#{if ev.createdFor != user.id}
+						<option value="${user.id}">${user.firstName} ${user.lastName}</option>
+					#{/if}
 				#{/list}
 			</select></td>
 			<td><span class="error"><font color="#556B2F">* </font>#{error 'birthdayPerson'/}</span></td>
@@ -54,8 +56,8 @@
 			<td><label><font color="#556B2F"> Event type:</font></label></td>
 			<td><select name="eventType">
 				<option value="">&nbsp;</option>
-				<option value="Birthday">Birthday</option>
-				<option value="Surprise">Surprise Party</option>
+				<option value="Birthday" #{if ev.type.equals("Birthday")} selected="selected" #{/if}>Birthday</option>
+				<option value="Surprise" #{if ev.type.equals("Surprise")} selected="selected" #{/if}>Surpirse Party</option>
 			</select></td>
 		</tr>
 		<tr>

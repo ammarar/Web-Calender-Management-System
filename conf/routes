@@ -7,6 +7,7 @@ GET     /                                       Application.index
 GET     /register								Application.register
 GET     /forgetPassword							Applicaiton.forgetPassword								
 GET     /createBirthdayEvent					Application.createBirthdayEvent
+GET     /editEvent								Application.editEvent
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
