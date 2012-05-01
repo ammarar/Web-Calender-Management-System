@@ -77,9 +77,9 @@ public class Application extends Controller {
 		index();
     }
     
-    public static void editEvent()
+    public static void editEvent(long eventID)
     {
-    	long eventID = 1;//TODO: Long.parseLong(session.get("eventID"));
+    	//long eventID = 1;//TODO: Long.parseLong(session.get("eventID"));
     	Event ev = Event.findById(eventID);
     	List<User> users = User.findAll();
     	String userName = null;
