@@ -24,6 +24,7 @@
          
           eventDate:${currentYear}${event.date} ,
           eventDescription: '${event.name}',
+          eventLink: '@{Application.editEvent(event.id)}',
         },
        #{/list} 
         { eventDate: 20120429, eventDescription: 'Kevin\'s BIG Birthday!' }
