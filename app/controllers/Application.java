@@ -34,7 +34,6 @@ import models.*;
 //@With(Secure.class)
 public class Application extends Controller {
 
-	
 	@Before
 	static void addDefaults() {
 		String currentYear = CalendarHelper.getCurrentYear();
@@ -132,7 +131,7 @@ public class Application extends Controller {
     }
 
     /**
-     * Get: register which direct to register form
+     * When user click register which direct to register form
      */
     public static void register() {
     	render();
@@ -187,15 +186,16 @@ public class Application extends Controller {
     }
   
     /**
-     * user forget password
+     * When user click 'forget password' link, direct user to the view to 
+     * retrieve password
      */
     public static void forgetPassword() {
     	render();
     }
     /**
-     * user request password form
+     * When user confirm to request password, process the request form
      */
-    public static void requestPassword (
+    public static void requestPasswordForm (
     	@Required String username,  
 		@Required @Email String email,
 		String button) {
@@ -208,7 +208,7 @@ public class Application extends Controller {
 		User user = User.find("byUserName", username).first();
 		if (user == null)
 		{
-			validation.addError(username, "username doesn't exist");
+			validation.addError("username", "username doesn't exist");
 		}
 		
 		// form validation	
