@@ -31,7 +31,8 @@ import models.*;
  * To activate the protection e.g authentication please remove the comment from the following route 
  * *      / =               module:secure
  */
-//@With(Secure.class)
+
+@With(Secure.class)
 public class Application extends Controller {
 
 	@Before
@@ -224,5 +225,36 @@ public class Application extends Controller {
 			
 			index();
 		}
+    }
+    public static void EditUserNotificationDays(@Required int notificationDays){
+    	User user; 
+    	user = User.find("byUserName", Security.connected()).first();
+    	validation.required(notificationDays);
+    //	validation.min(notificationDays,1);
+    	if(notificationDays<1){
+    		validation.addError("NotificationDays", "has to be a number >1!");
+    	}
+    	if(validation.hasErrors()){
+    		params.flash(); 
+    		validation.keep();
+    		EditUserNotificationDaysForm();
+    	}else{
+    	if (user!=null){
+    		user.setNotificationDays(notificationDays);
+    		user.save(); 
+    		System.out.println("user: "+ user.getUserName() + "Updated with "+ user.getNotificationDays());
+    	}
+    	}
+		
+    	Application.EditUserNotificationDaysForm();
+
+    }
+    public static void EditUserNotificationDaysForm(){
+    	User user; 
+    	user = User.find("byUserName", Security.connected()).first();
+    	String userName=user.getUserName();
+    	int NotificationDays= user.getNotificationDays();
+    	render(userName, NotificationDays); 
+
     }
 }

@@ -5,6 +5,7 @@
 # Home page
 GET     /                                       Application.index
 GET     /register								Application.register
+GET     /EditUserNotificationDaysForm		    Application.EditUserNotificationDaysForm
 GET     /forgetPassword							Application.forgetPassword								
 GET     /createBirthdayEvent					Application.createBirthdayEvent
 GET     /editEvent								Application.editEvent

@@ -1,0 +1,44 @@
+#{set title:'EditUserNotificationDaysForm' /}
+
+
+<html>
+	<head>
+        <title>#{get 'title' /}</title>
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+        #{get 'moreStyles' /}
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+        <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        #{get 'moreScripts' /}
+    </head>
+<body>
+<div id="background">
+	<div id="page">
+	<div class="header">
+	<div class="footer">
+	<div class="body">
+	<div class="body">
+	<div id="sidebar"><a href="@{Application.index()}"><img id="logo" src="/public/images/logo.gif" with="154" height="74" alt="" title=""/></a>
+	</div>
+	<div id="content">
+	
+	
+#{ifErrors}
+   <h1>Oops...</h1>
+#{/ifErrors}	
+<br>You have a notification period of  ${NotificationDays} days. 
+<br>If you want to change it please enter a new value higher then 1 and press Submit.
+
+<form action="@{Application.EditUserNotificationDays()}" method="GET">
+    <input type="text" name="notificationDays" value="${NotificationDays}" /> 
+    <input type="submit" value="Submit" />
+</form> 
+<a href="@{Application.index()}">Back to Web Calendar</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
