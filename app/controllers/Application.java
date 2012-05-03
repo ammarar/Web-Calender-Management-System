@@ -31,10 +31,10 @@ import models.*;
  * To activate the protection e.g authentication please remove the comment from the following route 
  * *      / =               module:secure
  */
-//@With(Secure.class)
+
+@With(Secure.class)
 public class Application extends Controller {
 
-	
 	@Before
 	static void addDefaults() {
 		String currentYear = CalendarHelper.getCurrentYear();
@@ -138,7 +138,7 @@ public class Application extends Controller {
     }
 
     /**
-     * Get: register which direct to register form
+     * When user click register which direct to register form
      */
     public static void register() {
     	render();
@@ -193,15 +193,16 @@ public class Application extends Controller {
     }
   
     /**
-     * user forget password
+     * When user click 'forget password' link, direct user to the view to 
+     * retrieve password
      */
     public static void forgetPassword() {
     	render();
     }
     /**
-     * user request password form
+     * When user confirm to request password, process the request form
      */
-    public static void requestPassword (
+    public static void requestPasswordForm (
     	@Required String username,  
 		@Required @Email String email,
 		String button) {
@@ -214,7 +215,7 @@ public class Application extends Controller {
 		User user = User.find("byUserName", username).first();
 		if (user == null)
 		{
-			validation.addError(username, "username doesn't exist");
+			validation.addError("username", "username doesn't exist");
 		}
 		
 		// form validation	
@@ -230,5 +231,36 @@ public class Application extends Controller {
 			
 			index();
 		}
+    }
+    public static void EditUserNotificationDays(@Required int notificationDays){
+    	User user; 
+    	user = User.find("byUserName", Security.connected()).first();
+    	validation.required(notificationDays);
+    //	validation.min(notificationDays,1);
+    	if(notificationDays<1){
+    		validation.addError("NotificationDays", "has to be a number >1!");
+    	}
+    	if(validation.hasErrors()){
+    		params.flash(); 
+    		validation.keep();
+    		EditUserNotificationDaysForm();
+    	}else{
+    	if (user!=null){
+    		user.setNotificationDays(notificationDays);
+    		user.save(); 
+    		System.out.println("user: "+ user.getUserName() + "Updated with "+ user.getNotificationDays());
+    	}
+    	}
+		
+    	Application.EditUserNotificationDaysForm();
+
+    }
+    public static void EditUserNotificationDaysForm(){
+    	User user; 
+    	user = User.find("byUserName", Security.connected()).first();
+    	String userName=user.getUserName();
+    	int NotificationDays= user.getNotificationDays();
+    	render(userName, NotificationDays); 
+
     }
 }
