@@ -39,7 +39,6 @@ public class Application extends Controller {
 	static void addDefaults() {
 		String currentYear = CalendarHelper.getCurrentYear();
 		 renderArgs.put("currentYear", currentYear);
-		
 	}
 	
     public static void index() {

@@ -9,13 +9,6 @@ public class Security extends Secure.Security {
         if (user !=null){
         	System.out.println("username: "+ user.getUserName());
         	if (password.equals(user.getPassword())){
-        		/**
-        		 * @author baljedai
-        		 * I add the following lines to put the userName & userID into the session scope so it 
-        		 * be used by other functions..  
-        		 */
-        		session.put("userName", username);
-        		session.put("userID", user.getId());
         		System.out.println("password: "+ user.getPassword());
         		return true; 
         	}
