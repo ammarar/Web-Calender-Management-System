@@ -42,6 +42,7 @@ public class Application extends Controller {
 		
 	}
 	
+	//@With(Secure.class)
     public static void index() {
         //calendarMonth();
     	render();
