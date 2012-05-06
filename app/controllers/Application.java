@@ -39,6 +39,7 @@ public class Application extends Controller {
 	static void addDefaults() {
 		String currentYear = CalendarHelper.getCurrentYear();
 		 renderArgs.put("currentYear", currentYear);
+		 
 	}
 	
     public static void index() {
@@ -123,12 +124,20 @@ public class Application extends Controller {
     public static void calendarMonth()
     {
     	List<Event> events = Event.findAll();
+    	User user = getLogedInUser(); 
+    	List<Event> renderdEventList = new ArrayList<Event>();
     	for (Event e : events)
     	{
+    		// format the event dates
     		if(e.getType().equalsIgnoreCase("Birthday") || e.getType().equalsIgnoreCase("Surprise"))
     			e.setDate(CalendarHelper.formatDateString(e.getDate()));
+    		
+    		if( ! (e.getType().equalsIgnoreCase("Surprise") && e.getCreatedFor() == user.getId()))
+    			renderdEventList.add(e);
+    		
+    		
     	}
-    	render(events);
+    	render(renderdEventList);
     }
 
     /**
@@ -256,5 +265,18 @@ public class Application extends Controller {
     	int NotificationDays= user.getNotificationDays();
     	render(userName, NotificationDays); 
 
+    }
+    
+    /** 
+     * This method is a helper method.
+     * @return Logged in user as in object 
+     */
+    private static User getLogedInUser(){
+    	String userName = session.get("username");
+    	User user = User.find("byUserName", userName).first();
+    	
+    	System.out.println("USRER IS: " + user.getFirstName() + " " + user.getLastName());
+    	
+    	return user;
     }
 }
