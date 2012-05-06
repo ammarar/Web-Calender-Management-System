@@ -19,15 +19,23 @@
 		myCalendar.defineEvents(
       [
       
-        #{list items:events, as:'event'} 
+        #{list items:renderdEventList, as:'event'} 
         {
          
           eventDate:${currentYear}${event.date} ,
           eventDescription: '${event.name}',
           eventLink: '@{Application.editEvent(event.id)}',
-        },
+         #{if event.type == 'Surprise' }
+   			 image: '@{'/public/images/surprise2.jpeg'}',
+   			 imageWidth: 13,
+   			 imageHeight: 13,
+		 #{/if}
+          
+        }
+       ${event_isLast ? '' : ','}
+       
        #{/list} 
-        { eventDate: 20120429, eventDescription: 'Kevin\'s BIG Birthday!' }
+        
       ]
     );
 
