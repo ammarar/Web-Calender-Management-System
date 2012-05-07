@@ -93,13 +93,18 @@ public class Application extends Controller {
 	
 	public static void editEventForm(String name, String date, Long createdFor, String eventType, long eventID)
     {
-    	if(params.get("deletebutton") != null)
+		
+		
+		if(params.get("deletebutton") != null)
     	{
+			System.out.println("Rcived: "+name+" "+date+" "+createdFor+" "+eventType+" "+eventID);
     		//TODO: 
-    		Event ev = Event.findById(Long.parseLong(params.get("eventID")));
+    		Event ev = Event.findById(eventID);
     		System.out.println(eventID);
     		ev.delete();
+    		calendarMonth();
     	}
+    	
     	validation.required(name);
     	validation.required(date);
     	validation.required(createdFor);
@@ -116,9 +121,13 @@ public class Application extends Controller {
 	          validation.keep();
 	          createBirthdayEvent();
 	    }
+	    
 	    Event ev = Event.findById(eventID);
+	    ev.setName(name);
+	    ev.setType(eventType);
+	    ev.setDate(date);
 	    ev.save();
-		index();
+	    calendarMonth();
     }
     
     /**
