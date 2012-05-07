@@ -12,7 +12,6 @@ import play.mvc.*;
 import util.CalendarHelper;
 import util.SendEmails;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -41,7 +40,7 @@ public class Application extends Controller {
 		 renderArgs.put("currentYear", currentYear);
 		 
 	}
-	
+
     public static void index() {
     	render();
     }
@@ -71,8 +70,7 @@ public class Application extends Controller {
 	          validation.keep();
 	          createBirthdayEvent();
 	    }
-	    //TODO:Put the username for createdBy instead of 2
-	    Event ev = new Event(name, date, createdFor, 2, eventType);
+	    Event ev = new Event(name, date, createdFor, getLogedInUser().getId(), eventType);
 	    System.out.println(ev);
 	    ev.save();
 		index();
@@ -80,7 +78,6 @@ public class Application extends Controller {
     
     public static void editEvent(long eventID)
     {
-    	//long eventID = 1;//TODO: Long.parseLong(session.get("eventID"));
     	Event ev = Event.findById(eventID);
     	List<User> users = User.findAll();
     	String userName = null;
@@ -93,9 +90,21 @@ public class Application extends Controller {
     	}
     	render(ev, users, userName);
     }
-    
-    public static void editEventForm(String name, String date, Long createdFor, String eventType, long eventID)
+	
+	public static void editEventForm(String name, String date, Long createdFor, String eventType, long eventID)
     {
+		
+		
+		if(params.get("deletebutton") != null)
+    	{
+			System.out.println("Rcived: "+name+" "+date+" "+createdFor+" "+eventType+" "+eventID);
+    		//TODO: 
+    		Event ev = Event.findById(eventID);
+    		System.out.println(eventID);
+    		ev.delete();
+    		calendarMonth();
+    	}
+    	
     	validation.required(name);
     	validation.required(date);
     	validation.required(createdFor);
@@ -112,9 +121,13 @@ public class Application extends Controller {
 	          validation.keep();
 	          createBirthdayEvent();
 	    }
+	    
 	    Event ev = Event.findById(eventID);
+	    ev.setName(name);
+	    ev.setType(eventType);
+	    ev.setDate(date);
 	    ev.save();
-		index();
+	    calendarMonth();
     }
     
     /**
@@ -138,7 +151,7 @@ public class Application extends Controller {
     	}
     	render(renderdEventList);
     }
-    
+ 
     public static void EditUserNotificationDays(@Required int notificationDays){
     	User user; 
     	user = User.find("byUserName", Security.connected()).first();
@@ -158,7 +171,7 @@ public class Application extends Controller {
     		System.out.println("user: "+ user.getUserName() + "Updated with "+ user.getNotificationDays());
     	}
     	}
-		
+
     	Application.EditUserNotificationDaysForm();
 
     }
@@ -175,7 +188,7 @@ public class Application extends Controller {
      * This method is a helper method.
      * @return Logged in user as in object 
      */
-    private static User getLogedInUser(){
+    private static User getLogedInUser() {
     	String userName = session.get("username");
     	User user = User.find("byUserName", userName).first();
     	
@@ -184,3 +197,4 @@ public class Application extends Controller {
     	return user;
     }
 }
+

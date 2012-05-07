@@ -9,7 +9,7 @@
         <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
         #{get 'moreScripts' /}
     </head>
-<body>
+<body style="overflow-x:hidden;overflow-y:scroll">
 	<div id="username">
     	<a href="@{Application.index()}">Username</a>
     </div>
@@ -66,8 +66,10 @@
 				<option value="Surprise" #{if ev.type.equals("Surprise")} selected="selected" #{/if}>Surpirse Party</option>
 			</select></td>
 		</tr>
+		<input type="hidden" name="eventID" value="${ev.id}" />
 		<tr>
-			<td><input style="margin-left:100px;" type="submit" value="Create Birthday Event" /></td>
+			<td><input style="margin-left:100px;" type="submit" value="Update Birthday Event" /></td>
+			<td><input style="margin-left:100px;" name="deletebutton" type="submit" value="Delete this event" /></td>
 		</tr>
 		#{/form}
 	</table>
