@@ -9,6 +9,7 @@ GET     /EditUserNotificationDaysForm		    Application.EditUserNotificationDaysF
 GET     /forgetPassword							Register.forgetPassword								
 GET     /createBirthdayEvent					Application.createBirthdayEvent
 GET     /editEvent								Application.editEvent
+GET     /notification							Application.notificationView
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
@@ -17,5 +18,6 @@ GET     /favicon.ico                            404
 GET     /public/                                staticDir:public
 
 # Catch all
-*       /{controller}/{action}                  {controller}.{action}
 *       /                                       module:secure
+*       /{controller}/{action}                  {controller}.{action}
+

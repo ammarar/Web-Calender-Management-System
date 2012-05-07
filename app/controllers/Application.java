@@ -22,6 +22,8 @@ import org.apache.commons.mail.SimpleEmail;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import models.*;
 
@@ -39,13 +41,16 @@ public class Application extends Controller {
 	@Before
 	static void addDefaults() {
 		String currentYear = CalendarHelper.getCurrentYear();
+		
 		 renderArgs.put("currentYear", currentYear);
+		
 		 
 	}
 
     public static void index() {
-    	List<Event> notificationList = notificationList();
-    	render(notificationList);
+    	int notificationsNumebr = getNotificationList().size();
+    	session.put("notificationsNumebr",notificationsNumebr);
+    	render();
     }
     
     public static void createBirthdayEvent()
@@ -188,23 +193,37 @@ public class Application extends Controller {
     }
     
     /**
+     * This method responsible for rendering the notification list view page
+     */
+    public static void notificationView(){
+    	List<Event> notificationList = getNotificationList(); 
+    	
+    	render(notificationList);
+    }
+    
+    
+    /**
      * Notification Action Method, This method will dispatch a list of events 
      * for the user to be notified based on his notification days setup he had chosen in his profile. 
      * 
      */
-    public static List<Event> notificationList(){
+    public static List<Event> getNotificationList(){
     	
     	List<Event> events = Event.findAll();
     	List<Event> notificatioEvents = new ArrayList<Event>();
     	User user = getLogedInUser();
     
+    	int days = 0 ;
     	
     	for(Event e : events){
     	
-    		Days d = Days.daysBetween(DateTime.parse(e.getDate()), DateTime.parse(CalendarHelper.getCurrentYear()));
-    		int days = d.getDays();
-    		if(days <= user.getNotificationDays() )
+    		Days d = Days.daysBetween(DateTime.parse(e.getDate()), DateTime.parse(CalendarHelper.getTodayDate()));
+    		days = d.getDays();
+    		
+    		 
+    		if(Math.abs(days) <= user.getNotificationDays())
     		{
+    			System.out.println("Days --> " + days + "User Notificaion " + user.getNotificationDays());
     			notificatioEvents.add(e);
     		}
     	}
@@ -221,8 +240,6 @@ public class Application extends Controller {
     private static User getLogedInUser() {
     	String userName = session.get("username");
     	User user = User.find("byUserName", userName).first();
-    	
-    	System.out.println("USRER IS: " + user.getFirstName() + " " + user.getLastName());
     	
     	return user;
     }
