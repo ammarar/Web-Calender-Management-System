@@ -1,0 +1,69 @@
+#{set title:'Register' /}
+
+<html>
+	<head>
+        <title>#{get 'title' /}</title>
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+        #{get 'moreStyles' /}
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+        <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        #{get 'moreScripts' /}
+    </head>
+<body>
+<div id="background">
+	<div id="page">
+	<div class="header">
+	<div class="footer">
+	<div class="body">
+	<div class="body">
+	<div id="sidebar"><a href="@{Application.index()}"><img id="logo" src="/public/images/logo.gif" with="154" height="74" alt="" title=""/></a>
+	</div>
+	<div id="content">
+	#{form @Register.registerForm()}
+	<p></p>
+	<div id="post">
+	<table style="margin-top:50px">
+		<th></th><th></th><th></th>
+		<tr>
+			<td><label><font color="#556B2F">User Name:</font></label></td>
+			<td><input type="text" size="30" name="username" value="${flash.username}" ></td>
+			<td><span class="error"><font color="#556B2F">*</font>#{error 'username' /}</span></td>
+		</tr>
+		<tr>
+			<td><label><font color="#556B2F">First Name:</font></label></td>
+			<td><input type="text" size="30" name="firstname" value="${flash.firstname}"></td>
+			<td><span class="error"><font color="#556B2F">*</font>#{error 'firstname' /}</span></td>
+		</tr>
+		<tr>	
+			<td><label><font color="#556B2F">Last Name:</font></label></td>
+			<td><input type="text" size="30" name="lastname" value="${flash.lastname}"></td>
+			<td><span class="error"><font color="#556B2F">*</font>#{error 'lastname' /}</span></td>
+		</tr>
+		<tr>
+			<td><label><font color="#556B2F">Email:</font></label></td>
+			<td><input type="text" size="30" name="email" value="${flash.email}"></td>
+			<td><span class="error"><font color="#556B2F">*</font>#{error 'email' /}</span></td>
+		</tr>
+		<tr>
+			<td><label><font color="#556B2F">Password:</font></label></td>
+			<td><input type="password" size="30" name="password" ></td>
+			<td><span class="error"><font color="#556B2F">*</font>#{error 'password' /}</span></td>
+		</tr>
+		<tr>
+			<td><label><font color="#556B2F">Confirm Password:</font></label></td>
+			<td><input type="password" size="30" name="confirmPassword" ></td>
+			<td><span class="error"><font color="#556B2F">*</font>#{error 'confirmPassword' /}</span></td>
+		</tr>
+		<tr>
+			<td><label><font color="#556B2F">* Required</font></label></td>
+		</tr>
+		<tr>
+			<td><input style="margin-left:100px;" type="submit" value="Submit" name="button" ></td>
+			<td><input style="margin-left:100px;" type="submit" value="Cancel" name="button" ></td>
+		</tr>
+		#{/form}
+	</table>
+	</div>
+	</div></div></div></div></div>
+	<div class="shadow"> </div></div></div>
+</body></html>
