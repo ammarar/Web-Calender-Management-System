@@ -24,9 +24,7 @@ public class BootstrapTest {
 	    assertEquals("test@test.com", test.getEmail());
 	    assertEquals("1", test.getPassword());
 	    assertTrue(15 == test.getNotificationDays());
-	    
-	    
-	    
+	        
 	}
 
 }

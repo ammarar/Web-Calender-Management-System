@@ -7,6 +7,9 @@ import play.jobs.OnApplicationStart;
 
 @OnApplicationStart
 public class Bootstrap extends Job {
+	/**
+	 * add some users and events for testing when the system starts
+	 */
 	@Override
 	public void doJob()
 	{
@@ -25,5 +28,4 @@ public class Bootstrap extends Job {
 		new Event("John birthday", "2012-07-28", john.getId(), admin.getId(), "Birthday").save();
 		new Event("Test", "2012-12-31", test.getId(), admin.getId(), "Birthday").save();
 	}
-	
 }

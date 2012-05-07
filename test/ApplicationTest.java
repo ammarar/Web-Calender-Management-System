@@ -1,6 +1,7 @@
 import org.junit.*;
 
 import controllers.Application;
+import controllers.Register;
 import play.test.*;
 import play.mvc.*;
 import play.mvc.Http.*;
@@ -27,7 +28,7 @@ public class ApplicationTest extends FunctionalTest {
     
     @Test
     public void testRegisterForm() {
-    	Application.registerForm("test", "fn", "ln", "wenjunzhang.surpass@gmail.com",
+    	Register.registerForm("test", "fn", "ln", "wenjunzhang.surpass@gmail.com",
     			"123", "123", "Submit");
     	
     	User test = User.find("byUsername", "test").first();
@@ -53,7 +54,7 @@ public class ApplicationTest extends FunctionalTest {
     
     @Test
     public void testRequestPasswordForm() {
-    	
+    	// test manually
     }
     
 }
