@@ -70,8 +70,7 @@ public class Application extends Controller {
 	          validation.keep();
 	          createBirthdayEvent();
 	    }
-	    //TODO:Put the username for createdBy instead of 2
-	    Event ev = new Event(name, date, createdFor, 2, eventType);
+	    Event ev = new Event(name, date, createdFor, getLogedInUser().getId(), eventType);
 	    System.out.println(ev);
 	    ev.save();
 		index();
