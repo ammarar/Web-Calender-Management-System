@@ -10,7 +10,6 @@ import play.libs.Crypto;
 import play.libs.Mail;
 import play.mvc.*;
 import util.CalendarHelper;
-
 import util.SendEmails;
 
 import java.text.ParseException;
@@ -98,9 +97,9 @@ public class Application extends Controller {
     	if(params.get("deletebutton") != null)
     	{
     		//TODO: 
-//    		Event ev = //Event.findById(eventID);
-//    		System.out.println(eventID);
-//    		ev.delete();
+    		Event ev = Event.findById(Long.parseLong(params.get("eventID")));
+    		System.out.println(eventID);
+    		ev.delete();
     	}
     	validation.required(name);
     	validation.required(date);

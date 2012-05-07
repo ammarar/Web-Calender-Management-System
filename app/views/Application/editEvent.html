@@ -66,8 +66,8 @@
 				<option value="Surprise" #{if ev.type.equals("Surprise")} selected="selected" #{/if}>Surpirse Party</option>
 			</select></td>
 		</tr>
+		<input type="hidden" name="eventID" value="${ev.id}" />
 		<tr>
-		<input name="eventID" >
 			<td><input style="margin-left:100px;" type="submit" value="Create Birthday Event" /></td>
 			<td><input style="margin-left:100px;" name="deletebutton" type="submit" value="Delete this event" /></td>
 		</tr>
