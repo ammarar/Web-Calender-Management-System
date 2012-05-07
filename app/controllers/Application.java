@@ -10,8 +10,8 @@ import play.libs.Crypto;
 import play.libs.Mail;
 import play.mvc.*;
 import util.CalendarHelper;
-import util.SendEmails;
 
+import util.SendEmails;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,10 +39,10 @@ public class Application extends Controller {
 	static void addDefaults() {
 		String currentYear = CalendarHelper.getCurrentYear();
 		 renderArgs.put("currentYear", currentYear);
+		 
 	}
-	
+
     public static void index() {
-        //calendarMonth();
     	render();
     }
     
@@ -80,7 +80,6 @@ public class Application extends Controller {
     
     public static void editEvent(long eventID)
     {
-    	//long eventID = 1;//TODO: Long.parseLong(session.get("eventID"));
     	Event ev = Event.findById(eventID);
     	List<User> users = User.findAll();
     	String userName = null;
@@ -93,9 +92,16 @@ public class Application extends Controller {
     	}
     	render(ev, users, userName);
     }
-    
-    public static void editEventForm(String name, String date, Long createdFor, String eventType, long eventID)
+	
+	public static void editEventForm(String name, String date, Long createdFor, String eventType, long eventID)
     {
+    	if(params.get("deletebutton") != null)
+    	{
+    		//TODO: 
+//    		Event ev = //Event.findById(eventID);
+//    		System.out.println(eventID);
+//    		ev.delete();
+    	}
     	validation.required(name);
     	validation.required(date);
     	validation.required(createdFor);
@@ -123,12 +129,20 @@ public class Application extends Controller {
     public static void calendarMonth()
     {
     	List<Event> events = Event.findAll();
+    	User user = getLogedInUser(); 
+    	List<Event> renderdEventList = new ArrayList<Event>();
     	for (Event e : events)
     	{
+    		// format the event dates
     		if(e.getType().equalsIgnoreCase("Birthday") || e.getType().equalsIgnoreCase("Surprise"))
     			e.setDate(CalendarHelper.formatDateString(e.getDate()));
+    		
+    		if( ! (e.getType().equalsIgnoreCase("Surprise") && e.getCreatedFor() == user.getId()))
+    			renderdEventList.add(e);
+    		
+    		
     	}
-    	render(events);
+    	render(renderdEventList);
     }
 
     /**
@@ -200,18 +214,18 @@ public class Application extends Controller {
     	@Required String username,  
 		@Required @Email String email,
 		String button) {
-	
+
 		if (button.equals("Cancel")) {
 			index();
 			return;
 		}
-		
+
 		User user = User.find("byUserName", username).first();
 		if (user == null)
 		{
 			validation.addError("username", "username doesn't exist");
 		}
-		
+
 		// form validation	
 		if (validation.hasErrors()) {
 			params.flash();
@@ -222,7 +236,7 @@ public class Application extends Controller {
 			// send Email 
 			SendEmails se = new SendEmails();
 			se.sendPassword(user);
-			
+
 			index();
 		}
     }
@@ -245,7 +259,7 @@ public class Application extends Controller {
     		System.out.println("user: "+ user.getUserName() + "Updated with "+ user.getNotificationDays());
     	}
     	}
-		
+
     	Application.EditUserNotificationDaysForm();
 
     }
@@ -256,5 +270,18 @@ public class Application extends Controller {
     	int NotificationDays= user.getNotificationDays();
     	render(userName, NotificationDays); 
 
+    }
+    
+    /** 
+     * This method is a helper method.
+     * @return Logged in user as in object 
+     */
+    private static User getLogedInUser(){
+    	String userName = session.get("username");
+    	User user = User.find("byUserName", userName).first();
+    	
+    	System.out.println("USRER IS: " + user.getFirstName() + " " + user.getLastName());
+    	
+    	return user;
     }
 }
