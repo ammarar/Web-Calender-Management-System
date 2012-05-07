@@ -7,7 +7,6 @@ import play.jobs.OnApplicationStart;
 
 @OnApplicationStart
 public class Bootstrap extends Job {
-
 	@Override
 	public void doJob()
 	{
@@ -19,12 +18,12 @@ public class Bootstrap extends Job {
 		User admin = new User("admin", "Admin", "A", "admin@test.com", "123", 0).save();
 		User test  = new User("test", "Test", "B", "test@test.com", "1", 15).save();
 		
-		new Event("Basem BD!", "1986-08-06", basem.getId(), ammar.getId(), "Surprise").save();
-		new Event("Ammar Birthday", "1985-06-17", ammar.getId(), ammar.getId(), "Birthday").save();
-		new Event("Yamin birthday", "1988-01-01", yamin.getId(), admin.getId(), "Surprise").save();
-		new Event("Niko birthday", "1989-05-05", niko.getId(), admin.getId(), "Surprise").save();
-		new Event("John birthday", "1984-07-28", john.getId(), admin.getId(), "Birthday").save();
-		new Event("Test", "1960-12-31", test.getId(), admin.getId(), "Birthday").save();
+		new Event("Basem BD!", "2012-08-06", basem.getId(), ammar.getId(), "Surprise").save();
+		new Event("Ammar Birthday", "2012-06-17", ammar.getId(), ammar.getId(), "Birthday").save();
+		new Event("Yamin birthday", "2013-01-01", yamin.getId(), admin.getId(), "Surprise").save();
+		new Event("Niko birthday", "2013-05-05", niko.getId(), admin.getId(), "Surprise").save();
+		new Event("John birthday", "2012-07-28", john.getId(), admin.getId(), "Birthday").save();
+		new Event("Test", "2012-12-31", test.getId(), admin.getId(), "Birthday").save();
 	}
 	
 }
