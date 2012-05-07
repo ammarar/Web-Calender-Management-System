@@ -11,28 +11,50 @@
         #{get 'moreScripts' /}
     </head>
 <body style="overflow-x:hidden;overflow-y:scroll">
-<div id="background">
+	<div id="username">
+    	<a href="@{Application.EditUserNotificationDaysForm()}">Edit Notification Days</a>
+    </div>
+    <div id="logout">
+    	<a href="@{Secure.logout()}">Logout</a>
+    </div>
+	<div id="background">
 	<div id="page">
 	<div class="header">
 	<div class="footer">
 	<div class="body">
-	<div class="body">
+	<div class="body">	
 	<div id="sidebar"><a href="@{Application.index()}"><img id="logo" src="/public/images/logo.gif" with="154" height="74" alt="" title=""/></a>
+		<ul class="navigation">
+			<li><a href="@{Application.index()}">HOME</a></li>
+			<li><a href="@{Application.calendarMonth()}">CALENDAR</a></li>
+			<li><a href="@{Application.createBirthdayEvent()}">POST</a></li>
+			<li class="active"><a href="@{Application.EditUserNotificationDaysForm()}">NOTIFICATION</a></li>
+		</ul>
 	</div>
-	<div id="content">
-	
-	
+	<div id="content">	
 #{ifErrors}
-   <h1>Oops...</h1>
-#{/ifErrors}	
-<br>You have a notification period of  ${NotificationDays} days. 
-<br>If you want to change it please enter a new value higher then 1 and press Submit.
-
-<form action="@{Application.EditUserNotificationDays()}" method="GET">
-    <input type="text" name="notificationDays" value="${NotificationDays}" /> 
-    <input type="submit" value="Submit" />
-</form> 
-<a href="@{Application.index()}">Back to Web Calendar</a>
+   <h1><font color="#556B2F">Oops...</font></h1>
+#{/ifErrors}
+	<table style="margin-top:50px;margin-left:100px">
+		<th></th><th></th><th></th>
+		<tr>
+			<td><font color="#556B2F">You have a notification period of  ${NotificationDays} days. </font></td>
+		</tr>
+		<tr>
+			<td><font color="#556B2F">If you want to change it please enter a new value higher then 1 and press Submit.</font></td>
+		</tr>
+	<form action="@{Application.EditUserNotificationDays()}" method="GET">
+    	<tr>
+    		<td><input type="text" name="notificationDays" value="${NotificationDays}" /></td>
+    	</tr>
+    	<tr>
+    		<td><input type="submit" value="Submit" /></td>
+		</tr>
+	</form>
+		<tr>
+			<td><a href="@{Application.index()}">Back to Web Calendar</a></td>
+		</tr>
+	</table>
 </div>
 </div>
 </div>

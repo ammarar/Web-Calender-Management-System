@@ -10,11 +10,14 @@
         <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
         #{get 'moreScripts' /}
     </head>
-<body style="overflow-x:hidden;overflow-y:scroll">
-<a href="@{Application.EditUserNotificationDaysForm()}">Edit Notification Days</a>
-<a href="@{Secure.logout()}">Log out</a>
-    	<div id="background">
-			
+	<body style="overflow-x:hidden;overflow-y:scroll">
+		<div id="username">
+    		<a href="@{Application.EditUserNotificationDaysForm()}">Edit Notification Days</a>
+    	</div>
+    	<div id="logout">
+    		<a href="@{Secure.logout()}">Logout</a>
+    	</div>
+    	<div id="background">			
 		<div id="page">
 		<div class="header">
 		<div class="footer">
@@ -25,6 +28,7 @@
 					<li class="active" ><a href="@{Application.index()}">HOME</a></li>
 					<li><a href="@{Application.calendarMonth()}">CALENDAR</a></li>
                     <li><a href="@{Application.createBirthdayEvent()}">POST</a></li>
+                    <li><a href="@{Application.EditUserNotificationDaysForm()}">NOTIFICATION</a></li>
 				</ul>
 		</div>
 		<div id="content" >									
