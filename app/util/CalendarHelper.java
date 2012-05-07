@@ -29,5 +29,4 @@ public class CalendarHelper {
 		strDate = strDate.replace("-","");
 		return strDate;
 	}
-
 }

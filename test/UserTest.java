@@ -17,6 +17,4 @@ public class UserTest extends UnitTest {
 	    assertNotNull(test);
 	    assertEquals("Bob", test.getFirstName());
 	}
-
-
 }
