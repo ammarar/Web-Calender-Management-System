@@ -19,6 +19,8 @@ import java.util.*;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.commons.mail.SimpleEmail;
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 import org.joda.time.LocalDate;
 
 import models.*;
@@ -42,7 +44,8 @@ public class Application extends Controller {
 	}
 
     public static void index() {
-    	render();
+    	List<Event> notificationList = notificationList();
+    	render(notificationList);
     }
     
     public static void createBirthdayEvent()
@@ -277,6 +280,33 @@ public class Application extends Controller {
     	int NotificationDays= user.getNotificationDays();
     	render(userName, NotificationDays); 
 
+    }
+    
+    /**
+     * Notification Action Method, This method will dispatch a list of events 
+     * for the user to be notified based on his notification days setup he had chosen in his profile. 
+     * 
+     */
+    public static List<Event> notificationList(){
+    	
+    	List<Event> events = Event.findAll();
+    	List<Event> notificatioEvents = new ArrayList<Event>();
+    	User user = getLogedInUser();
+    
+    	
+    	for(Event e : events){
+    	
+    		Days d = Days.daysBetween(DateTime.parse(e.getDate()), DateTime.parse(CalendarHelper.getCurrentYear()));
+    		int days = d.getDays();
+    		if(days <= user.getNotificationDays() )
+    		{
+    			notificatioEvents.add(e);
+    		}
+    	}
+    	  
+    	return notificatioEvents;
+    	
+    	
     }
     
     /** 

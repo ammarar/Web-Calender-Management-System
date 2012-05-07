@@ -11,12 +11,24 @@ import org.joda.time.DateTime;
 public class CalendarHelper {
 	
 	
+	/**
+	 * @author baljedai
+	 *  This method will use JODA API to return current year.
+	 * @return current year. 
+	 */
 	public static String getCurrentYear(){
 		
 		DateTime date = new DateTime(); 
 		
 		return new Integer(date.getYear()).toString();
 	}
+	
+	
+   public static String getTodayDate(){
+	   DateTime date = new DateTime(); 
+		
+		return new Integer(date.getYear()).toString() + "-" + new Integer(date.getMonthOfYear()).toString()+"-"+new Integer(date.getDayOfMonth()).toString();
+   }
 	
 	/**
 	 * @author baljedai
