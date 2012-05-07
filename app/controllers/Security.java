@@ -20,7 +20,6 @@ public class Security extends Secure.Security {
         	System.out.println("username: "+ username + " not found" );
         	return false; 
         }
-        
     }
 //    static void onDisconnected() {
 //    }

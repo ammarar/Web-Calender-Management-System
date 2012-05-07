@@ -1,3 +1,73 @@
+<<<<<<< HEAD
+<html>
+	<head>
+        <title>Calendar</title>
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/jec-styled.css'}">
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+        <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/calendar-2.4.js'}" type="text/javascript"></script>
+        
+        <!--Here Start the Calls for the Calendar JS API -->
+        
+        <script type="text/javascript">
+		var myCalendar = new JEC('myCalendarContainer', {
+			tableClass: 'styledCalendar',	
+			lastMonth: 201510,
+			specialDays: [ 1, 7 ]
+		});
+
+		myCalendar.defineEvents(
+      [
+      
+        #{list items:events, as:'event'} 
+        {
+         
+          eventDate:${currentYear}${event.date} ,
+          eventDescription: '${event.name}',
+          eventLink: '@{Application.editEvent(event.id)}',
+        },
+       #{/list} 
+        { eventDate: 20120429, eventDescription: 'Kevin\'s BIG Birthday!' }
+      ]
+    );
+
+		// show the calender 
+		myCalendar.showCalendar();
+	</script>
+
+    <!--Here ENDS the Calls for the Calendar JS API -->     
+        
+    </head>
+<body style="overflow-x:hidden;overflow-y:scroll">
+	<div id="username">
+    	<a href="@{Application.index()}">Username</a>
+    </div>
+    <div id="logout">
+    	<a href="@{Application.index()}">Logout</a>
+    </div>
+	<div id="background">
+	<div id="page">
+	<div class="header">
+	<div class="footer">
+	<div class="body">
+	<div class="body">
+	<div id="sidebar"><a href="@{Application.index()}"><img id="logo" src="/public/images/logo.gif" with="154" height="74" alt="" title=""/></a>
+		<ul class="navigation">
+			<li><a href="@{Application.index()}">HOME</a></li>
+			<li class="active"><a href="@{Application.calendarMonth()}">CALENDAR</a></li>
+			<li><a href="@{Application.createBirthdayEvent()}">POST</a></li>
+		</ul>
+	</div>
+	<div id="content">
+	<div id='myCalendarContainer'>
+	<!--img src="/public/images/cotton-flower.jpg" width="726" height="546" alt="" title=""-->
+
+
+	</div></div></div></div></div></div>
+	<div class="shadow"> </div></div></div>
+</body>
+=======
 <html>
 	<head>
         <title>Calendar</title>
@@ -74,4 +144,5 @@
 	</div></div></div></div></div></div>
 	<div class="shadow"> </div></div></div>
 </body>
+>>>>>>> bab932cd6f58ee3d77a4228eee777227fa7bc9b0
 </html>
