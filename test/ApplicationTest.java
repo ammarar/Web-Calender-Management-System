@@ -57,4 +57,12 @@ public class ApplicationTest extends FunctionalTest {
     	// test manually
     }
     
+    @Test
+    public void testNotification() {
+    	Response response = GET("/notification");
+    	assertIsOk(response);
+    	assertContentType("text/html", response);
+        assertCharset(play.Play.defaultWebEncoding, response);
+    }
+    
 }
