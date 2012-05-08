@@ -149,8 +149,8 @@ public class Application extends Controller {
     	for (Event e : events)
     	{
     		// format the event dates
-    		if(e.getType().equalsIgnoreCase("Birthday") || e.getType().equalsIgnoreCase("Surprise"))
-    			e.setDate(CalendarHelper.formatDateString(e.getDate()));
+//    		if((e.getType().equalsIgnoreCase("Birthday") || e.getType().equalsIgnoreCase("Surprise")) && e.getDate() < CalendarHelper.getTodayDate())
+//    			e.setDate(CalendarHelper.formatDateString(e.getDate()));
     		
     		if( ! (e.getType().equalsIgnoreCase("Surprise") && e.getCreatedFor() == user.getId()))
     			renderdEventList.add(e);

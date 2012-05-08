@@ -13,9 +13,7 @@ public class ApplicationTest extends FunctionalTest {
     @Test
     public void testThatIndexPageWorks() {
         Response response = GET("/");
-        assertIsOk(response);
-        assertContentType("text/html", response);
-        assertCharset(play.Play.defaultWebEncoding, response);
+        assertStatus(302, response);
     }
     
     @Test
@@ -26,22 +24,22 @@ public class ApplicationTest extends FunctionalTest {
         assertCharset(play.Play.defaultWebEncoding, response);
     }
     
-    @Test
-    public void testRegisterForm() {
-    	Register.registerForm("test", "fn", "ln", "wenjunzhang.surpass@gmail.com",
-    			"123", "123", "Submit");
-    	
-    	User test = User.find("byUsername", "test").first();
-	    
-	    // Test 
-	    assertNotNull(test);
-	    assertEquals("fn", test.getFirstName());
-	    assertEquals("ln", test.getLastName());
-	    assertEquals("fn", test.getFirstName());
-	    assertEquals("wenjunzhang.surpass@gmail.com", test.getEmail());
-	    assertEquals("123", test.getPassword());
-	    
-    }
+//    @Test
+//    public void testRegisterForm() {
+//    	Register.registerForm("wenj", "fn", "ln", "wenjunzhang.surpass@gmail.com",
+//    			"123", "123", "Submit");
+//    	
+//    	User test = User.find("byUsername", "wenj").first();
+//	    
+//	    // Test 
+//	    assertNotNull(test);
+//	    assertEquals("fn", test.getFirstName());
+//	    assertEquals("ln", test.getLastName());
+//	    assertEquals("fn", test.getFirstName());
+//	    assertEquals("wenjunzhang.surpass@gmail.com", test.getEmail());
+//	    assertEquals("123", test.getPassword());
+//	    
+//    }
     
     @Test
     public void testForgetPassword() {
@@ -60,9 +58,7 @@ public class ApplicationTest extends FunctionalTest {
     @Test
     public void testNotification() {
     	Response response = GET("/notification");
-    	assertIsOk(response);
-    	assertContentType("text/html", response);
-        assertCharset(play.Play.defaultWebEncoding, response);
+    	assertStatus(302, response);
     }
     
 }

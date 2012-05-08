@@ -8,14 +8,14 @@ public class UserTest extends UnitTest {
 	@Test
 	public void createAndRetrieveUser() {
 	    // Create a new user and save it
-	    new User("test", "Bob", "Bob123","test@test.com", "pass123",10).save();
+	    new User("TestingUser", "Bob", "Bob123","test@test.com", "pass123",10).save();
 	    
 	    // Retrieve the user with e-mail address bob@gmail.com
-	    User test = User.find("byUsername", "test").first();
+	    User test = User.find("byUserName", "TestingUser").first();
 	    
 	    // Test 
 	    assertNotNull(test);
-	    assertEquals("Bob", test.getFirstName());
+	    assertEquals("TestingUser", test.getUserName());
 	}
 
 

@@ -1,7 +1,16 @@
 *{ You can use plain selenium command using the selenium tag }*
 
 #{selenium}
-    // Open the home page, and check that no error occured
-    open('/')
+    // Open the Creat Event page, and check that no error occured
+    open('/createBirthdayEvent')
     assertNotTitle('Application error')
+    type('name','Autmatic Test')
+    type('date','Test')
+   clickAndWait('css=input[type=submit]')
+   
+   // Should get an error
+    assertTextPresent('Date is not in yyyy-MM-dd format')
+   
+    
+    
 #{/selenium}
