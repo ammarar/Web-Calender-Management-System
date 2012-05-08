@@ -149,9 +149,9 @@ public class Application extends Controller {
     	List<Event> renderdEventList = new ArrayList<Event>();
     	for (Event e : events)
     	{
-    		// format the event dates
-//    		if((e.getType().equalsIgnoreCase("Birthday") || e.getType().equalsIgnoreCase("Surprise")) && e.getDate() < CalendarHelper.getTodayDate())
-//    			e.setDate(CalendarHelper.formatDateString(e.getDate()));
+    		 //format the event dates
+    		if((e.getType().equalsIgnoreCase("Birthday") || e.getType().equalsIgnoreCase("Surprise")) )
+    			e.setDate(CalendarHelper.formatDateString(e.getDate()));
     		
     		if( ! (e.getType().equalsIgnoreCase("Surprise") && e.getCreatedFor() == user.getId()))
     			renderdEventList.add(e);
@@ -224,8 +224,10 @@ public class Application extends Controller {
     		 
     		if(Math.abs(days) <= user.getNotificationDays())
     		{
-    			System.out.println("Days --> " + days + "User Notificaion " + user.getNotificationDays());
-    			notificatioEvents.add(e);
+    			if( ! (e.getType().equalsIgnoreCase("Surprise") && e.getCreatedFor() == user.getId()))
+    				notificatioEvents.add(e);
+    			
+    			
     		}
     	}
     	  
