@@ -1,4 +1,4 @@
-#{set title:'EditUserNotificationDaysForm' /}
+
 
 
 <html>
@@ -28,33 +28,22 @@
 			<li><a href="@{Application.index()}">HOME</a></li>
 			<li><a href="@{Application.calendarMonth()}">CALENDAR</a></li>
 			<li><a href="@{Application.createBirthdayEvent()}">POST</a></li>
-			<li><a href="@{Application.notificationView()}">NOTIFICATION (${session.notificationsNumebr})</a></li>
+			<li class="active"><a href="@{Application.notificationView()}">NOTIFICATION (${session.notificationsNumebr})</a></li>
 		</ul>
 	</div>
 	<div id="content">	
-#{ifErrors}
-   <h1><font color="#556B2F">Oops...</font></h1>
-#{/ifErrors}
 	<table style="margin-top:50px;margin-left:100px">
 		<th></th><th></th><th></th>
+		#{list items:notificationList, as:'event'} 
 		<tr>
-			<td><font color="#556B2F">You have a notification period of  ${NotificationDays} days. </font></td>
-		</tr>
-		<tr>
-			<td><font color="#556B2F">If you want to change it please enter a new value higher then 1 and press Submit.</font></td>
-		</tr>
-	<form action="@{Application.EditUserNotificationDays()}" method="GET">
-    	<tr>
-    		<td><input type="text" name="notificationDays" value="${NotificationDays}" /></td>
-    	</tr>
-    	<tr>
-    		<td><input type="submit" value="Submit" /></td>
-		</tr>
-	</form>
-		<tr>
-			<td><a href="@{Application.index()}">Back to Web Calendar</a></td>
-		</tr>
-	</table>
+			<td><font color="#556B2F"><a href="@{Application.editEvent(event.id)}"> ${event_index} ${event.name} On ${event.date} </font></td>
+		</tr>	
+	#{/list}
+ 		
+		 
+		
+	
+		
 </div>
 </div>
 </div>

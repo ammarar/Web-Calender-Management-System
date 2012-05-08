@@ -19,7 +19,11 @@ import java.util.*;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.commons.mail.SimpleEmail;
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import models.*;
 
@@ -37,11 +41,15 @@ public class Application extends Controller {
 	@Before
 	static void addDefaults() {
 		String currentYear = CalendarHelper.getCurrentYear();
+		
 		 renderArgs.put("currentYear", currentYear);
+		
 		 
 	}
 
     public static void index() {
+    	int notificationsNumebr = getNotificationList().size();
+    	session.put("notificationsNumebr",notificationsNumebr);
     	render();
     }
     
@@ -141,8 +149,8 @@ public class Application extends Controller {
     	for (Event e : events)
     	{
     		// format the event dates
-    		if(e.getType().equalsIgnoreCase("Birthday") || e.getType().equalsIgnoreCase("Surprise"))
-    			e.setDate(CalendarHelper.formatDateString(e.getDate()));
+//    		if((e.getType().equalsIgnoreCase("Birthday") || e.getType().equalsIgnoreCase("Surprise")) && e.getDate() < CalendarHelper.getTodayDate())
+//    			e.setDate(CalendarHelper.formatDateString(e.getDate()));
     		
     		if( ! (e.getType().equalsIgnoreCase("Surprise") && e.getCreatedFor() == user.getId()))
     			renderdEventList.add(e);
@@ -184,6 +192,47 @@ public class Application extends Controller {
 
     }
     
+    /**
+     * This method responsible for rendering the notification list view page
+     */
+    public static void notificationView(){
+    	List<Event> notificationList = getNotificationList(); 
+    	
+    	render(notificationList);
+    }
+    
+    
+    /**
+     * Notification Action Method, This method will dispatch a list of events 
+     * for the user to be notified based on his notification days setup he had chosen in his profile. 
+     * 
+     */
+    public static List<Event> getNotificationList(){
+    	
+    	List<Event> events = Event.findAll();
+    	List<Event> notificatioEvents = new ArrayList<Event>();
+    	User user = getLogedInUser();
+    
+    	int days = 0 ;
+    	
+    	for(Event e : events){
+    	
+    		Days d = Days.daysBetween(DateTime.parse(e.getDate()), DateTime.parse(CalendarHelper.getTodayDate()));
+    		days = d.getDays();
+    		
+    		 
+    		if(Math.abs(days) <= user.getNotificationDays())
+    		{
+    			System.out.println("Days --> " + days + "User Notificaion " + user.getNotificationDays());
+    			notificatioEvents.add(e);
+    		}
+    	}
+    	  
+    	return notificatioEvents;
+    	
+    	
+    }
+    
     /** 
      * This method is a helper method.
      * @return Logged in user as in object 
@@ -191,8 +240,6 @@ public class Application extends Controller {
     private static User getLogedInUser() {
     	String userName = session.get("username");
     	User user = User.find("byUserName", userName).first();
-    	
-    	System.out.println("USRER IS: " + user.getFirstName() + " " + user.getLastName());
     	
     	return user;
     }
