@@ -50,7 +50,8 @@ public class Application extends Controller {
     public static void index() {
     	int notificationsNumebr = getNotificationList().size();
     	session.put("notificationsNumebr",notificationsNumebr);
-    	render();
+    	User user = getLogedInUser();
+    	render(user);
     }
     
     public static void createBirthdayEvent()
