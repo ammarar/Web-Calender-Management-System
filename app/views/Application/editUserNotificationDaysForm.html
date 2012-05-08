@@ -11,9 +11,6 @@
         #{get 'moreScripts' /}
     </head>
 <body style="overflow-x:hidden;overflow-y:scroll">
-	<div id="username">
-    	<a href="@{Application.EditUserNotificationDaysForm()}">Edit Notification Days</a>
-    </div>
     <div id="logout">
     	<a href="@{Secure.logout()}">Logout</a>
     </div>
@@ -27,8 +24,9 @@
 		<ul class="navigation">
 			<li><a href="@{Application.index()}">HOME</a></li>
 			<li><a href="@{Application.calendarMonth()}">CALENDAR</a></li>
-			<li><a href="@{Application.createBirthdayEvent()}">POST</a></li>
+			<li><a href="@{Application.createBirthdayEvent()}">EVENT</a></li>
 			<li><a href="@{Application.notificationView()}">NOTIFICATION (${session.notificationsNumebr})</a></li>
+			<li class="active"><a href="@{Application.EditUserNotificationDaysForm()}">EDIT NOTIFICATION</a><li>
 		</ul>
 	</div>
 	<div id="content">	
